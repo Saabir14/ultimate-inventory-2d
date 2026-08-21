@@ -1,7 +1,9 @@
 #include "inventory_ui.hpp"
 #include "godot_cpp/classes/global_constants.hpp"
+#include "godot_cpp/variant/typed_array.hpp"
 #include "godot_cpp/variant/variant.hpp"
 #include "inventory_holder.hpp"
+#include "inventory_item.hpp"
 
 using namespace godot;
 
@@ -31,4 +33,14 @@ void InventoryUI::set_inventory(const Ref<Inventory> &p_inventory) {
 }
 Ref<Inventory> InventoryUI::get_inventory() const {
 	return inventory_holder ? inventory_holder->get_inventory() : nullptr;
+}
+
+void InventoryUI::update_ui() {
+    // Clear existing children
+    for (int32_t i = 0; i < get_child_count(true); i++) {
+        get_child(i)->queue_free();
+    }
+
+    // Add item slots for each inventory item
+    // for (int32_t i = 0; i < get_inventory())
 }

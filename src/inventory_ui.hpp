@@ -26,6 +26,8 @@ public:
 
 	void set_inventory(const Ref<Inventory> &p_inventory);
 	Ref<Inventory> get_inventory() const;
+
+	void update_ui();
 };
 
 } //namespace godot
