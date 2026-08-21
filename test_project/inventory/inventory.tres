@@ -1,0 +1,6 @@
+[gd_resource type="Inventory" format=3 uid="uid://c6egunrcf3aoc"]
+
+[ext_resource type="InventoryItem" uid="uid://dbdm77tl5xivh" path="res://inventory/item.tres" id="1_e3mim"]
+
+[resource]
+items = Array[InventoryItem]([null, null, ExtResource("1_e3mim"), null, null])
