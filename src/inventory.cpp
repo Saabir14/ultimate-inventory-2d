@@ -10,7 +10,5 @@ void Inventory::_bind_methods() {
 	ADD_PROPERTY(PropertyInfo(Variant::ARRAY, "items", PROPERTY_HINT_ARRAY_TYPE, "InventoryItem", PROPERTY_USAGE_DEFAULT, "Ref<InventoryItem>"), "set_items", "get_items");
 }
 
-Inventory::Inventory() { set_local_to_scene(true); }
-
 void Inventory::set_items(const TypedArray<Ref<InventoryItem>> &p_items) { items = p_items; }
 TypedArray<Ref<InventoryItem>> Inventory::get_items() const { return items; }

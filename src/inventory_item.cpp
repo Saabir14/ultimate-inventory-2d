@@ -20,8 +20,6 @@ void InventoryItem::_bind_methods() {
 	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "item_2d_scene", PROPERTY_HINT_RESOURCE_TYPE, "PackedScene"), "set_item_2d_scene", "get_item_2d_scene");
 }
 
-InventoryItem::InventoryItem() { set_local_to_scene(true); }
-
 void InventoryItem::set_item_ui_scene(const Ref<PackedScene> &p_scene) { item_ui_scene = p_scene; }
 Ref<PackedScene> InventoryItem::get_item_ui_scene() const { return item_ui_scene; }
 

@@ -19,8 +19,6 @@ protected:
 	static void _bind_methods();
 
 public:
-	Inventory();
-
 	void set_items(const TypedArray<Ref<InventoryItem>> &p_items);
 	TypedArray<Ref<InventoryItem>> get_items() const;
 };

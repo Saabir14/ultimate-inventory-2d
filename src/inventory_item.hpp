@@ -17,8 +17,6 @@ protected:
 	static void _bind_methods();
 
 public:
-	InventoryItem();
-
 	void set_item_ui_scene(const Ref<PackedScene> &p_scene);
 	Ref<PackedScene> get_item_ui_scene() const;
 
