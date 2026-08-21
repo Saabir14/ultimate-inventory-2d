@@ -3,6 +3,7 @@
 #include "inventory.hpp"
 #include "inventory_holder.hpp"
 #include "inventory_item.hpp"
+#include "inventory_ui.hpp"
 
 #include <gdextension_interface.h>
 #include <godot_cpp/core/class_db.hpp>
@@ -20,6 +21,7 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level) {
 	GDREGISTER_CLASS(InventoryItem)
 	GDREGISTER_CLASS(Inventory)
 	GDREGISTER_CLASS(InventoryHolder)
+	GDREGISTER_CLASS(InventoryUI)
 }
 
 void uninitialize_gdextension_types(ModuleInitializationLevel p_level) {
