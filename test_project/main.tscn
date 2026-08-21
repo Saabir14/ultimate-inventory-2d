@@ -8,3 +8,7 @@ script = ExtResource("1_ig7tw")
 
 [node name="InventoryHolder" type="InventoryHolder" parent="." unique_id=746750314]
 inventory = ExtResource("2_0xm2m")
+
+[node name="InventoryUI" type="InventoryUI" parent="." unique_id=946767249 node_paths=PackedStringArray("inventory_holder")]
+inventory_holder = NodePath("../InventoryHolder")
+inventory = ExtResource("2_0xm2m")
