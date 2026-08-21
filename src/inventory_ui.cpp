@@ -26,12 +26,9 @@ void InventoryUI::set_item_slot_scene(const Ref<PackedScene> &p_scene) { item_sl
 Ref<PackedScene> InventoryUI::get_item_slot_scene() const { return item_slot_scene; }
 
 void InventoryUI::set_inventory(const Ref<Inventory> &p_inventory) {
-	ERR_FAIL_COND_MSG(inventory_holder == nullptr, vformat("InventoryUI %s couldn't set inventory as InventoryHolder is not set", this));
+	ERR_FAIL_COND_MSG(inventory_holder == nullptr, vformat("InventoryUI %s couldn't set inventory as InventoryHolder is not assigned", this));
 	inventory_holder->set_inventory(p_inventory);
 }
 Ref<Inventory> InventoryUI::get_inventory() const {
-	if (inventory_holder == nullptr) {
-		ERR_FAIL_V_MSG(nullptr, "Couldn't parse the input arguments.");
-	}
-	return inventory_holder->get_inventory();
+	return inventory_holder ? inventory_holder->get_inventory() : nullptr;
 }
