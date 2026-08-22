@@ -5,10 +5,10 @@
 using namespace godot;
 
 void Inventory::_bind_methods() {
-	ClassDB::bind_method(D_METHOD("set_items", "items"), &Inventory::set_items);
-	ClassDB::bind_method(D_METHOD("get_items"), &Inventory::get_items);
-	ADD_PROPERTY(PropertyInfo(Variant::ARRAY, "items", PROPERTY_HINT_ARRAY_TYPE, "InventoryItem", PROPERTY_USAGE_DEFAULT, "Ref<InventoryItem>"), "set_items", "get_items");
+	ClassDB::bind_method(D_METHOD("set_slots", "slots"), &Inventory::set_slots);
+	ClassDB::bind_method(D_METHOD("get_slots"), &Inventory::get_slots);
+	ADD_PROPERTY(PropertyInfo(Variant::ARRAY, "slots", PROPERTY_HINT_ARRAY_TYPE, "InventoryItem", PROPERTY_USAGE_DEFAULT, "Ref<InventoryItem>"), "set_items", "get_items");
 }
 
-void Inventory::set_items(const TypedArray<Ref<InventoryItem>> &p_items) { items = p_items; }
-TypedArray<Ref<InventoryItem>> Inventory::get_items() const { return items; }
+void Inventory::set_slots(const TypedArray<Ref<InventorySlot>> &p_slots) { slots = p_slots; }
+TypedArray<Ref<InventorySlot>> Inventory::get_slots() const { return slots; }

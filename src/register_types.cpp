@@ -2,9 +2,9 @@
 
 #include "resource/inventory.hpp"
 #include "resource/inventory_item.hpp"
+#include "resource/inventory_slot.hpp"
 
 #include "node/inventory_holder.hpp"
-#include "node/inventory_ui.hpp"
 
 #include <gdextension_interface.h>
 #include <godot_cpp/core/class_db.hpp>
@@ -20,9 +20,9 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level) {
 
 	// Register your classes here, so they are available in the Godot editor and engine
 	GDREGISTER_CLASS(InventoryItem)
+	GDREGISTER_ABSTRACT_CLASS(InventorySlot)
 	GDREGISTER_CLASS(Inventory)
 	GDREGISTER_CLASS(InventoryHolder)
-	GDREGISTER_CLASS(InventoryUI)
 }
 
 void uninitialize_gdextension_types(ModuleInitializationLevel p_level) {

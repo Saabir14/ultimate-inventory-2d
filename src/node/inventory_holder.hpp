@@ -6,6 +6,7 @@
 
 namespace godot {
 
+// Node to hold inventory
 class InventoryHolder : public Node {
 	GDCLASS(InventoryHolder, Node)
 

@@ -6,11 +6,14 @@
 
 namespace godot {
 
+// Resource to store item data
 class InventoryItem : public Resource {
 	GDCLASS(InventoryItem, Resource)
 
 private:
+    // Scene of item UI when in inventory
 	Ref<PackedScene> item_ui_scene;
+	// 2d scene of item when dropped
 	Ref<PackedScene> item_2d_scene;
 
 protected:
