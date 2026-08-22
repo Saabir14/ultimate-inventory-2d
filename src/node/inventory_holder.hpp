@@ -2,7 +2,7 @@
 
 #include "godot_cpp/classes/node.hpp"
 #include "godot_cpp/classes/ref.hpp"
-#include "inventory.hpp"
+#include "../resource/inventory.hpp"
 
 namespace godot {
 

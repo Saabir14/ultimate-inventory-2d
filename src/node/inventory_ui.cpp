@@ -1,9 +1,7 @@
 #include "inventory_ui.hpp"
 #include "godot_cpp/classes/global_constants.hpp"
-#include "godot_cpp/variant/typed_array.hpp"
 #include "godot_cpp/variant/variant.hpp"
 #include "inventory_holder.hpp"
-#include "inventory_item.hpp"
 
 using namespace godot;
 

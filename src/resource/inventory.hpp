@@ -13,14 +13,19 @@ class Inventory : public Resource {
 	GDCLASS(Inventory, Resource)
 
 private:
+    // All inventory items stored in a TypedArray of Ref<InventoryItem>
 	TypedArray<Ref<InventoryItem>> items;
 
 protected:
 	static void _bind_methods();
 
 public:
+    // items set get
 	void set_items(const TypedArray<Ref<InventoryItem>> &p_items);
 	TypedArray<Ref<InventoryItem>> get_items() const;
+
+	// add item to inventory
+
 };
 
 } //namespace godot

@@ -1,7 +1,7 @@
 #include "inventory_holder.hpp"
 #include "godot_cpp/classes/global_constants.hpp"
 #include "godot_cpp/classes/ref.hpp"
-#include "inventory.hpp"
+#include "../resource/inventory.hpp"
 
 using namespace godot;
 

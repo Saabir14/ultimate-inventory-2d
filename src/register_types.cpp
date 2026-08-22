@@ -1,9 +1,10 @@
 // Include your classes, that you want to expose to Godot
 
-#include "inventory.hpp"
-#include "inventory_holder.hpp"
-#include "inventory_item.hpp"
-#include "inventory_ui.hpp"
+#include "resource/inventory.hpp"
+#include "resource/inventory_item.hpp"
+
+#include "node/inventory_holder.hpp"
+#include "node/inventory_ui.hpp"
 
 #include <gdextension_interface.h>
 #include <godot_cpp/core/class_db.hpp>
