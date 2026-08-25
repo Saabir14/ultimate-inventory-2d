@@ -49,13 +49,13 @@ bool InventorySlot::swap_item_from_slot(const Ref<InventorySlot> &p_slot) {
 }
 
 bool InventorySlot::place_item_from_slot(const Ref<InventorySlot> &p_slot) {
-	// Try adding item from slot inside the item
-	if (item->place(p_slot->item))
-		return true;
-
 	// If item is empty, just try existing swap
 	if (item.is_null())
 		return swap_item_from_slot(p_slot);
+
+	// Try adding item from slot inside the item
+	if (item->place(p_slot->item))
+		return true;
 
 	// Placement not succesfull
 	return false;
