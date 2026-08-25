@@ -31,6 +31,11 @@ public:
 
     void set_items(const TypedArray<Ref<InventoryItem>> &p_items);
     TypedArray<Ref<InventoryItem>> get_items() const;
+
+    int64_t get_size() const;
+
+    bool place_item_from_slot(const Ref<InventorySlot> &p_slot, int64_t index = -1);
+    bool swap_item_from_slot(const Ref<InventorySlot> &p_slot, int64_t index);
 };
 
 } //namespace godot

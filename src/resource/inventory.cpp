@@ -35,7 +35,7 @@ Ref<InventorySlot> Inventory::get_slot() const { return slot; }
 
 void Inventory::_update_slots() {
 	for (int64_t i = 0; i < slots.size(); i++) {
-		Ref<InventoryItem> item = slot.is_valid() ? slot->get_item() : nullptr;
+		Ref<InventoryItem> item = Ref<InventorySlot>(slots[i])->get_item();
 		Ref<InventorySlot> new_slot = slot.is_valid() ? Ref<InventorySlot>(slot->duplicate()) : memnew(InventorySlot);
 		new_slot->set_item(item);
 		slots[i] = new_slot;
@@ -67,4 +67,23 @@ TypedArray<Ref<InventoryItem>> Inventory::get_items() const {
 			items[i] = nullptr;
 	}
 	return items;
+}
+
+int64_t Inventory::get_size() const { return slots.size(); }
+
+bool Inventory::place_item_from_slot(const Ref<InventorySlot> &p_slot, int64_t index) {
+	// If index < 0, test all slots one by one
+	if (index < 0) {
+		for (int64_t i = 0; i < slots.size(); i++)
+			if (Ref<InventorySlot>(slots[i])->place_item_from_slot(p_slot))
+				return true;
+		return false;
+	}
+
+	// If index >= 0, test only that slot
+	return Ref<InventorySlot>(slots[index])->place_item_from_slot(p_slot);
+}
+
+bool Inventory::swap_item_from_slot(const Ref<InventorySlot> &p_slot, int64_t index) {
+	return Ref<InventorySlot>(slots[index])->swap_item_from_slot(p_slot);
 }
