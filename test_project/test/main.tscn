@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://nu0lvg7u16vs"]
+
+[ext_resource type="PackedScene" uid="uid://krltaryx0q3a" path="res://ui/item_slot_scene.tscn" id="1_yfdjg"]
+
+[sub_resource type="InventorySlot" id="InventorySlot_amfhw"]
+slot_ui_scene = ExtResource("1_yfdjg")
+
+[sub_resource type="Inventory" id="Inventory_amfhw"]
+tempelate_slot = SubResource("InventorySlot_amfhw")
+
+[node name="Main" type="Node" unique_id=1172094202]
+
+[node name="InventoryHolder" type="InventoryHolder" parent="." unique_id=677296547]
+inventory = SubResource("Inventory_amfhw")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1006122922]
+offset_right = 40.0
+offset_bottom = 40.0

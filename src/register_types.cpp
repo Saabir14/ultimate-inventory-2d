@@ -20,7 +20,7 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level) {
 
 	// Register your classes here, so they are available in the Godot editor and engine
 	GDREGISTER_CLASS(InventoryItem)
-	GDREGISTER_ABSTRACT_CLASS(InventorySlot)
+	GDREGISTER_CLASS(InventorySlot)
 	GDREGISTER_CLASS(Inventory)
 	GDREGISTER_CLASS(InventoryHolder)
 }

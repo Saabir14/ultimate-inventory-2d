@@ -5,6 +5,7 @@
 #include "godot_cpp/classes/wrapped.hpp"
 #include "godot_cpp/variant/typed_array.hpp"
 
+#include "resource/inventory_item.hpp"
 #include "resource/inventory_slot.hpp"
 
 namespace godot {
@@ -15,18 +16,20 @@ class Inventory : public Resource {
 	GDCLASS(Inventory, Resource)
 
 private:
+    // Tempelate slot to use for all array slots
+    Ref<InventorySlot> slot;
 	// All inventory items stored in a TypedArray of Ref<InventoryItem>
-	TypedArray<Ref<InventorySlot>> slots;
+	TypedArray<Ref<InventoryItem>> items;
 
 protected:
 	static void _bind_methods();
 
 public:
-	// items set get
-	void set_slots(const TypedArray<Ref<InventorySlot>> &p_slots);
-	TypedArray<Ref<InventorySlot>> get_slots() const;
+    void set_slot(const Ref<InventorySlot> &p_slot);
+    Ref<InventorySlot> get_slot() const;
 
-	// add item to inventory
+    void set_items(const TypedArray<Ref<InventoryItem>> &p_items);
+    TypedArray<Ref<InventoryItem>> get_items() const;
 };
 
 } //namespace godot
