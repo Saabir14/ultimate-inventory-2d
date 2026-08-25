@@ -1,5 +1,6 @@
 #include "inventory_item.hpp"
 
+#include "godot_cpp/classes/engine.hpp"
 #include "godot_cpp/classes/global_constants.hpp"
 #include "godot_cpp/classes/packed_scene.hpp"
 #include "godot_cpp/classes/ref.hpp"

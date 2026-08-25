@@ -16,10 +16,11 @@ class Inventory : public Resource {
 	GDCLASS(Inventory, Resource)
 
 private:
-    // Tempelate slot to use for all array slots
+    // Template slot to use for all array slots
     Ref<InventorySlot> slot;
-	// All inventory items stored in a TypedArray of Ref<InventoryItem>
-	TypedArray<Ref<InventoryItem>> items;
+
+	TypedArray<Ref<InventorySlot>> slots;
+	void _update_slots();
 
 protected:
 	static void _bind_methods();

@@ -1,6 +1,7 @@
 #include "inventory_slot.hpp"
 #include "godot_cpp/classes/wrapped.hpp"
 #include "godot_cpp/core/class_db.hpp"
+#include "godot_cpp/core/print_string.hpp"
 #include "resource/inventory_item.hpp"
 #include <utility>
 
@@ -25,12 +26,14 @@ void InventorySlot::_bind_methods() {
 void InventorySlot::set_slot_ui_scene(const Ref<PackedScene> &p_scene) {
 	slot_ui_scene = p_scene;
 	emit_changed();
+	print_line("changed");
 }
 Ref<PackedScene> InventorySlot::get_slot_ui_scene() const { return slot_ui_scene; }
 
 void InventorySlot::set_item(const Ref<InventoryItem> &p_item) {
 	item = p_item;
 	emit_changed();
+	print_line("changed");
 }
 Ref<InventoryItem> InventorySlot::get_item() const { return item; }
 
