@@ -1,8 +1,8 @@
 #include "inventory.hpp"
 #include "godot_cpp/classes/global_constants.hpp"
 #include "godot_cpp/classes/ref.hpp"
-#include "godot_cpp/core/print_string.hpp"
 #include "godot_cpp/variant/callable.hpp"
+#include "godot_cpp/variant/callable_method_pointer.hpp"
 #include "godot_cpp/variant/variant.hpp"
 #include "resource/inventory_item.hpp"
 #include "resource/inventory_slot.hpp"
@@ -20,17 +20,13 @@ void Inventory::_bind_methods() {
 }
 
 void Inventory::set_slot(const Ref<InventorySlot> &p_slot) {
-	if (slot.is_valid()) {
-		slot->disconnect("changed", Callable(this, "_update_slots"));
-		print_line("disconnected");
-	}
+	if (slot.is_valid())
+		slot->disconnect("changed", callable_mp(this, &Inventory::_update_slots));
 
 	slot = p_slot;
 
-	if (slot.is_valid()) {
-		slot->connect("changed", Callable(this, "_update_slots"));
-		print_line("connected");
-	}
+	if (slot.is_valid())
+		slot->connect("changed", callable_mp(this, &Inventory::_update_slots));
 
 	// Set all slots to this slot
 	_update_slots();
@@ -44,7 +40,6 @@ void Inventory::_update_slots() {
 		new_slot->set_item(item);
 		slots[i] = new_slot;
 	}
-	print_line("_update_slots");
 }
 
 void Inventory::set_items(const TypedArray<Ref<InventoryItem>> &p_items) {
@@ -54,15 +49,12 @@ void Inventory::set_items(const TypedArray<Ref<InventoryItem>> &p_items) {
 		slot = slots[i];
 		if (slot.is_valid()) {
 			slot->set_item(p_items[i]);
-			print_line("valid");
 		} else {
 			slot = memnew(InventorySlot);
 			slot->set_item(p_items[i]);
 			slots[i] = slot;
-			print_line("invalid");
 		}
 	}
-	print_line(slots);
 }
 TypedArray<Ref<InventoryItem>> Inventory::get_items() const {
 	TypedArray<Ref<InventoryItem>> items = TypedArray<Ref<InventoryItem>>();

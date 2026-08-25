@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://nu0lvg7u16vs"]
 
-[sub_resource type="InventoryItem" id="InventoryItem_amfhw"]
+[sub_resource type="PackedScene" id="PackedScene_wms8s"]
 
 [sub_resource type="InventorySlot" id="InventorySlot_amfhw"]
-item = SubResource("InventoryItem_amfhw")
+slot_ui_scene = SubResource("PackedScene_wms8s")
 
 [sub_resource type="Inventory" id="Inventory_ik7bt"]
 template_slot = SubResource("InventorySlot_amfhw")
