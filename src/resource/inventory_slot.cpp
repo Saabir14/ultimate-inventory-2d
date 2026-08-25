@@ -36,6 +36,8 @@ Ref<InventoryItem> InventorySlot::get_item() const { return item; }
 
 bool InventorySlot::_can_hold_item(const Ref<InventoryItem> &p_item) { return true; }
 
+bool InventorySlot::place_item(const Ref<InventoryItem> &p_item) { return _can_hold_item(p_item) ? item->place(p_item) : false; }
+
 bool InventorySlot::swap_item_from_slot(const Ref<InventorySlot> &p_slot) {
 	// Check if this slot can hold input slot's item
 	if (!_can_hold_item(p_slot->item))
@@ -54,11 +56,7 @@ bool InventorySlot::place_item_from_slot(const Ref<InventorySlot> &p_slot) {
 		return swap_item_from_slot(p_slot);
 
 	// Try adding item from slot inside the item
-	if (item->place(p_slot->item))
-		return true;
-
-	// Placement not succesfull
-	return false;
+	return place_item(p_slot->item);
 }
 
 bool InventorySlot::interact_item_from_slot(const Ref<InventorySlot> &p_slot) {
