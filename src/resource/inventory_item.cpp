@@ -21,7 +21,6 @@ void InventoryItem::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("get_item_2d_scene"), &InventoryItem::get_item_2d_scene);
 	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "item_2d_scene", PROPERTY_HINT_RESOURCE_TYPE, "PackedScene"), "set_item_2d_scene", "get_item_2d_scene");
 
-	GDVIRTUAL_BIND(free_ready);
 	GDVIRTUAL_BIND(place, "item");
 
 	// TODO: virtual bind all take functions
@@ -32,8 +31,6 @@ Ref<PackedScene> InventoryItem::get_item_ui_scene() const { return item_ui_scene
 
 void InventoryItem::set_item_2d_scene(const Ref<PackedScene> &p_scene) { item_2d_scene = p_scene; }
 Ref<PackedScene> InventoryItem::get_item_2d_scene() const { return item_2d_scene; }
-
-bool InventoryItem::free_ready() { return false; }
 
 bool InventoryItem::place(const Ref<InventoryItem> item) { return false; }
 
