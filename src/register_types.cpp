@@ -1,15 +1,14 @@
 // Include your classes, that you want to expose to Godot
 
-#include "resource/inventory.hpp"
-#include "resource/inventory_item.hpp"
-#include "resource/inventory_slot.hpp"
-
-#include "node/inventory_holder.hpp"
-
 #include <gdextension_interface.h>
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/godot.hpp>
+
+#include "node/slot_node.hpp"
+
+#include "resource/inventory_item.hpp"
+#include "resource/inventory_slot.hpp"
 
 using namespace godot;
 
@@ -19,10 +18,12 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level) {
 	}
 
 	// Register your classes here, so they are available in the Godot editor and engine
+	// Resources
 	GDREGISTER_CLASS(InventoryItem)
 	GDREGISTER_CLASS(InventorySlot)
-	GDREGISTER_CLASS(Inventory)
-	GDREGISTER_CLASS(InventoryHolder)
+
+	// Nodes
+	GDREGISTER_CLASS(SlotNode)
 }
 
 void uninitialize_gdextension_types(ModuleInitializationLevel p_level) {

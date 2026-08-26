@@ -4,6 +4,8 @@
 #include "resource/inventory_item.hpp"
 
 namespace godot {
+// Forward declaration of SlotNode to prevent circular dependency
+class SlotNode;
 
 // Resource to store a single item data in a slot
 // Used to process swapping of items bitween slots and other item UI interactions
@@ -11,9 +13,9 @@ class InventorySlot : public Resource {
 	GDCLASS(InventorySlot, Resource)
 
 private:
-    // UI for InventorySlot
-    // UI for InventoryItem will be child of this
-    Ref<PackedScene> slot_ui_scene;
+	// UI for InventorySlot
+	// UI for InventoryItem will be child of this
+	Ref<PackedScene> slot_ui_scene;
 
 	// IvenentoryItem resource that stores item properties
 	Ref<InventoryItem> item;
@@ -22,8 +24,10 @@ protected:
 	static void _bind_methods();
 
 public:
-    void set_slot_ui_scene(const Ref<PackedScene> &p_scene);
-    Ref<PackedScene> get_slot_ui_scene() const;
+	void set_slot_scene(const Ref<PackedScene> &p_scene);
+	Ref<PackedScene> get_slot_scene() const;
+
+	SlotNode *instantiate_slot(PackedScene::GenEditState p_edit_state = PackedScene::GEN_EDIT_STATE_DISABLED);
 
 	void set_item(const Ref<InventoryItem> &p_item);
 	Ref<InventoryItem> get_item() const;
