@@ -34,6 +34,8 @@ public:
 	virtual bool _can_hold_item(const Ref<InventoryItem> &p_item);
 	GDVIRTUAL1RC(bool, _can_hold_item, Ref<InventoryItem>);
 
+	// Takes an inventory item as input
+	//
 	bool place_item(const Ref<InventoryItem> &p_item);
 
 	// Takes an inventory slot as input

@@ -2,7 +2,6 @@
 #include "godot_cpp/classes/wrapped.hpp"
 #include "godot_cpp/core/class_db.hpp"
 #include "resource/inventory_item.hpp"
-#include <utility>
 
 using namespace godot;
 
@@ -36,7 +35,14 @@ Ref<InventoryItem> InventorySlot::get_item() const { return item; }
 
 bool InventorySlot::_can_hold_item(const Ref<InventoryItem> &p_item) { return true; }
 
-bool InventorySlot::place_item(const Ref<InventoryItem> &p_item) { return _can_hold_item(p_item) ? item->place(p_item) : false; }
+bool InventorySlot::place_item(const Ref<InventoryItem> &p_item) {
+    if (!_can_hold_item(p_item)) return false;
+    if (item.is_null()) {
+        set_item(p_item);
+        return true;
+    }
+    return item->place(p_item);
+}
 
 bool InventorySlot::swap_item_from_slot(const Ref<InventorySlot> &p_slot) {
 	// Check if this slot can hold input slot's item
@@ -46,7 +52,10 @@ bool InventorySlot::swap_item_from_slot(const Ref<InventorySlot> &p_slot) {
 	if (!p_slot->_can_hold_item(item))
 		return false;
 
-	std::swap(p_slot->item, item);
+	// Swap items
+	Ref<InventoryItem> temp_item = item;
+	set_item(p_slot->item);
+    p_slot->set_item(temp_item);
 	return true;
 }
 
