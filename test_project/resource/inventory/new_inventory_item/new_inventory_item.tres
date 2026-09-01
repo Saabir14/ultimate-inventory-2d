@@ -1,0 +1,6 @@
+[gd_resource type="InventoryItem" format=3 uid="uid://d25c1s1hc7cu5"]
+
+[ext_resource type="PackedScene" uid="uid://ckddjjpcn6vwu" path="res://resource/inventory/new_inventory_item/new_inventory_item_ui.tscn" id="1_e561g"]
+
+[resource]
+item_ui_scene = ExtResource("1_e561g")

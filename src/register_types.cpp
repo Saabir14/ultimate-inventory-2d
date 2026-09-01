@@ -5,7 +5,8 @@
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/godot.hpp>
 
-#include "node/slot_node.hpp"
+#include "node/item_ui_node.hpp"
+#include "node/slot_ui_node.hpp"
 
 #include "resource/inventory_item.hpp"
 #include "resource/inventory_slot.hpp"
@@ -23,7 +24,8 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level) {
 	GDREGISTER_CLASS(InventorySlot)
 
 	// Nodes
-	GDREGISTER_CLASS(SlotNode)
+	GDREGISTER_CLASS(SlotUiNode)
+	GDREGISTER_CLASS(ItemUiNode)
 }
 
 void uninitialize_gdextension_types(ModuleInitializationLevel p_level) {

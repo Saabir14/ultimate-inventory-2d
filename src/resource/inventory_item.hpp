@@ -7,6 +7,7 @@
 #include <godot_cpp/core/gdvirtual.gen.inc>
 
 namespace godot {
+class ItemUiNode;
 
 // Resource to store item data
 // Extend to add properties
@@ -28,6 +29,8 @@ public:
 
 	void set_item_2d_scene(const Ref<PackedScene> &p_scene);
 	Ref<PackedScene> get_item_2d_scene() const;
+
+	ItemUiNode *instantiate_item_ui(PackedScene::GenEditState p_edit_state = PackedScene::GenEditState(0));
 
 	// Adds another item to this item
 	// This could be adding stack size

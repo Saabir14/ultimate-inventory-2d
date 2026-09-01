@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://ckddjjpcn6vwu"]
+
+[ext_resource type="Texture2D" uid="uid://bioamopp6syek" path="res://icon.svg" id="1_dfaed"]
+[ext_resource type="InventoryItem" uid="uid://d25c1s1hc7cu5" path="res://resource/inventory/new_inventory_item/new_inventory_item.tres" id="1_ofanw"]
+
+[node name="NewInventoryItem" type="ItemUiNode" unique_id=1254487186]
+item = ExtResource("1_ofanw")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1631134883]
+offset_right = 427.0
+offset_bottom = 207.0
+texture = ExtResource("1_dfaed")
+expand_mode = 1
+stretch_mode = 5
