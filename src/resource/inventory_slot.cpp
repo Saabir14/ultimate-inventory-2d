@@ -1,3 +1,4 @@
+#include "godot_cpp/classes/engine.hpp"
 #include "godot_cpp/classes/object.hpp"
 #include "godot_cpp/classes/scene_tree.hpp"
 #include "godot_cpp/classes/wrapped.hpp"
@@ -31,12 +32,15 @@ void InventorySlot::_bind_methods() {
 }
 
 void InventorySlot::set_slot_ui_scene(const Ref<PackedScene> &p_scene) {
-	// Check if p_scene contains SlotNode as root node
-	if (p_scene.is_valid()) {
-		Node *node = p_scene->instantiate();
-		SlotUiNode *slot_node = Object::cast_to<SlotUiNode>(node);
-		ERR_FAIL_COND_MSG(!slot_node, "set_slot_scene scene must have SlotNode as root node");
+	if (p_scene.is_null()) {
+		slot_ui_scene = nullptr;
+		return;
 	}
+
+	// Check type of root node
+	Node *node = p_scene->instantiate();
+	SlotUiNode *slot_node = Object::cast_to<SlotUiNode>(node);
+	ERR_FAIL_COND_MSG(slot_node == nullptr, "set_slot_scene scene must have SlotNode as root node");
 
 	slot_ui_scene = p_scene;
 }

@@ -1,14 +1,33 @@
-[gd_scene format=3 uid="uid://ckddjjpcn6vwu"]
+[gd_scene format=3 uid="uid://c7k8ab1pldb28"]
 
 [ext_resource type="Texture2D" uid="uid://bioamopp6syek" path="res://icon.svg" id="1_dfaed"]
-[ext_resource type="InventoryItem" uid="uid://d25c1s1hc7cu5" path="res://resource/inventory/new_inventory_item/new_inventory_item.tres" id="1_ofanw"]
 
-[node name="NewInventoryItem" type="ItemUiNode" unique_id=1254487186]
-item = ExtResource("1_ofanw")
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dfaed"]
+load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1631134883]
-offset_right = 427.0
-offset_bottom = 207.0
+[sub_resource type="PackedScene" id="PackedScene_ofanw"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"id_paths": [],
+"names": PackedStringArray("NewInventoryItemUi", "ItemUiNode", "TextureRect", "offset_right", "offset_bottom", "texture", "stretch_mode"),
+"node_count": 2,
+"node_ids": PackedInt32Array(1859346978, 1536804251),
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 0, 0, 0, 0, 2, 2, -1, 4, 3, 0, 4, 0, 5, 1, 6, 2, 0),
+"variants": [128.0, SubResource("CompressedTexture2D_dfaed"), 4],
+"version": 3
+}
+
+[sub_resource type="InventoryItem" id="InventoryItem_ctmxx"]
+item_ui_scene = SubResource("PackedScene_ofanw")
+
+[node name="NewInventoryItemUi" type="ItemUiNode" unique_id=1859346978]
+item = SubResource("InventoryItem_ctmxx")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1536804251]
+offset_right = 128.0
+offset_bottom = 128.0
 texture = ExtResource("1_dfaed")
-expand_mode = 1
-stretch_mode = 5
+stretch_mode = 4

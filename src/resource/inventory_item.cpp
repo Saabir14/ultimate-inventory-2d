@@ -4,6 +4,7 @@
 #include "godot_cpp/classes/global_constants.hpp"
 #include "godot_cpp/classes/packed_scene.hpp"
 #include "godot_cpp/classes/ref.hpp"
+#include "godot_cpp/classes/resource.hpp"
 #include "godot_cpp/classes/wrapped.hpp"
 #include "godot_cpp/core/class_db.hpp"
 #include "godot_cpp/core/object.hpp"
@@ -30,22 +31,29 @@ void InventoryItem::_bind_methods() {
 }
 
 void InventoryItem::set_item_ui_scene(const Ref<PackedScene> &p_scene) {
-    // Check if p_scene contains ItemUiNode as root node
-	if (p_scene.is_valid()) {
-		Node *node = p_scene->instantiate();
-		ItemUiNode *item_ui_node = Object::cast_to<ItemUiNode>(node);
-		ERR_FAIL_COND_MSG(!item_ui_node, "set_item_ui_scene scene must have ItemUiNode as root node");
+	if (p_scene.is_null()) {
+		item_ui_scene = nullptr;
+		return;
 	}
+
+	// Check if p_scene contains ItemUiNode as root node
+	Node *node = p_scene->instantiate();
+	ItemUiNode *item_ui_node = Object::cast_to<ItemUiNode>(node);
+	ERR_FAIL_COND_MSG(!item_ui_node, "set_item_ui_scene scene must have ItemUiNode as root node");
 
 	item_ui_scene = p_scene;
 }
 Ref<PackedScene> InventoryItem::get_item_ui_scene() const { return item_ui_scene; }
 
-void InventoryItem::set_item_2d_scene(const Ref<PackedScene> &p_scene) { item_2d_scene = p_scene; }
+void InventoryItem::set_item_2d_scene(const Ref<PackedScene> &p_scene) {
+	// TODO: Check if p_scene contains Item2dNode as root node
+	//
+	item_2d_scene = p_scene;
+}
 Ref<PackedScene> InventoryItem::get_item_2d_scene() const { return item_2d_scene; }
 
 ItemUiNode *InventoryItem::instantiate_item_ui(PackedScene::GenEditState p_edit_state) {
-    if (item_ui_scene.is_null())
+	if (item_ui_scene.is_null())
 		return nullptr;
 
 	Node *node = item_ui_scene->instantiate(p_edit_state);

@@ -1,4 +1,5 @@
 #include "slot_ui_node.hpp"
+#include "godot_cpp/classes/engine.hpp"
 #include "godot_cpp/classes/global_constants.hpp"
 #include "godot_cpp/classes/node.hpp"
 #include "godot_cpp/classes/ref.hpp"
@@ -18,7 +19,14 @@ void SlotUiNode::_bind_methods() {
 	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "item_ui_holder", PROPERTY_HINT_NODE_TYPE), "set_item_ui_holder", "get_item_ui_holder");
 }
 
-void SlotUiNode::set_slot(Ref<InventorySlot> p_slot) { slot = p_slot; }
+void SlotUiNode::set_slot(Ref<InventorySlot> p_slot) {
+	// If running in editor, create a deep duplicate to prevent recursion
+	if (p_slot.is_valid() && Engine::get_singleton()->is_editor_hint()) {
+		slot = p_slot->duplicate_deep(Resource::DEEP_DUPLICATE_ALL);
+		WARN_PRINT("This resource is duplicated with DEEP_DUPLICATE_ALL when set in the editor to prevent infinite recursion");
+	} else
+		slot = p_slot;
+}
 Ref<InventorySlot> SlotUiNode::get_slot() const { return slot; }
 
 void SlotUiNode::set_item_ui_holder(Node *p_holder) {
