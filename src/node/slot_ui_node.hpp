@@ -1,14 +1,14 @@
 #pragma once
 
-#include "godot_cpp/classes/node.hpp"
+#include "godot_cpp/classes/margin_container.hpp"
 #include "resource/inventory_slot.hpp"
 
 namespace godot {
 
 // SlotNode holds a slot
 // handles instantiating the UI scene of the slot
-class SlotUiNode : public Node {
-	GDCLASS(SlotUiNode, Node)
+class SlotUiNode : public MarginContainer {
+	GDCLASS(SlotUiNode, MarginContainer)
 
 private:
 	Ref<InventorySlot> slot;

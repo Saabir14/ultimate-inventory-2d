@@ -64,7 +64,10 @@ SlotUiNode *InventorySlot::instantiate_slot_ui(PackedScene::GenEditState p_edit_
 	return slot_node;
 }
 
-void InventorySlot::set_item(const Ref<InventoryItem> &p_item) { item = p_item; }
+void InventorySlot::set_item(const Ref<InventoryItem> &p_item) {
+	item = p_item;
+	emit_changed();
+}
 Ref<InventoryItem> InventorySlot::get_item() const { return item; }
 
 bool InventorySlot::_can_hold_item(const Ref<InventoryItem> &p_item) { return true; }

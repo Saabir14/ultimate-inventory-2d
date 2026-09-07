@@ -12,10 +12,9 @@ void ItemUiNode::_bind_methods() {
 
 void ItemUiNode::set_item(const Ref<InventoryItem> &p_item) {
 	// If running in editor, create a deep duplicate to prevent recursion
-	if (p_item.is_valid() && Engine::get_singleton()->is_editor_hint()) {
+	if (p_item.is_valid() && Engine::get_singleton()->is_editor_hint())
 		item = p_item->duplicate_deep(Resource::DEEP_DUPLICATE_ALL);
-		WARN_PRINT("This resource is duplicated with DEEP_DUPLICATE_ALL when set in the editor to prevent infinite recursion");
-	} else
+	else
 		item = p_item;
 }
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "godot_cpp/classes/node.hpp"
+#include "godot_cpp/classes/margin_container.hpp"
 #include "resource/inventory_item.hpp"
 
 
@@ -8,8 +8,8 @@
 // Handles instantiating the UI scene of the item
 namespace godot {
 
-class ItemUiNode : public Node {
-	GDCLASS(ItemUiNode, Node)
+class ItemUiNode : public MarginContainer {
+	GDCLASS(ItemUiNode, MarginContainer)
 
 private:
 	Ref<InventoryItem> item;

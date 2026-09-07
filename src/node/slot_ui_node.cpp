@@ -3,6 +3,7 @@
 #include "godot_cpp/classes/global_constants.hpp"
 #include "godot_cpp/classes/node.hpp"
 #include "godot_cpp/classes/ref.hpp"
+#include "godot_cpp/variant/callable_method_pointer.hpp"
 #include "godot_cpp/variant/variant.hpp"
 #include "node/item_ui_node.hpp"
 #include "resource/inventory_item.hpp"
@@ -21,11 +22,15 @@ void SlotUiNode::_bind_methods() {
 
 void SlotUiNode::set_slot(Ref<InventorySlot> p_slot) {
 	// If running in editor, create a deep duplicate to prevent recursion
-	if (p_slot.is_valid() && Engine::get_singleton()->is_editor_hint()) {
+	if (p_slot.is_valid() && Engine::get_singleton()->is_editor_hint())
 		slot = p_slot->duplicate_deep(Resource::DEEP_DUPLICATE_ALL);
-		WARN_PRINT("This resource is duplicated with DEEP_DUPLICATE_ALL when set in the editor to prevent infinite recursion");
-	} else
+	else
 		slot = p_slot;
+
+	if (slot.is_valid())
+		slot->connect("changed", callable_mp(this, &SlotUiNode::_update_item_ui));
+
+	_update_item_ui();
 }
 Ref<InventorySlot> SlotUiNode::get_slot() const { return slot; }
 
