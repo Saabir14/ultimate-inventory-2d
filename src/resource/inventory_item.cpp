@@ -40,6 +40,7 @@ void InventoryItem::set_item_ui_scene(const Ref<PackedScene> &p_scene) {
 	Node *node = p_scene->instantiate();
 	ItemUiNode *item_ui_node = Object::cast_to<ItemUiNode>(node);
 	ERR_FAIL_COND_MSG(!item_ui_node, "set_item_ui_scene scene must have ItemUiNode as root node");
+	node->queue_free();
 
 	item_ui_scene = p_scene;
 }

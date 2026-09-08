@@ -41,6 +41,7 @@ void InventorySlot::set_slot_ui_scene(const Ref<PackedScene> &p_scene) {
 	Node *node = p_scene->instantiate();
 	SlotUiNode *slot_node = Object::cast_to<SlotUiNode>(node);
 	ERR_FAIL_COND_MSG(slot_node == nullptr, "set_slot_scene scene must have SlotNode as root node");
+	node->queue_free();
 
 	slot_ui_scene = p_scene;
 }
@@ -91,9 +92,14 @@ bool InventorySlot::swap_item_from_slot(const Ref<InventorySlot> &p_slot) {
 		return false;
 
 	// Swap items
-	Ref<InventoryItem> temp_item = item;
-	set_item(p_slot->item);
-	p_slot->set_item(temp_item);
+	std::swap(item, p_slot->item);
+
+	// Let slots know their items have changed
+	// Since std::swap was used, this needs
+	// to be done manually here
+	emit_changed();
+	p_slot->emit_changed();
+
 	return true;
 }
 
