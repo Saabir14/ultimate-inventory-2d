@@ -49,13 +49,13 @@ _bundled = {
 "conn_count": 0,
 "conns": PackedInt32Array(),
 "editable_instances": [],
-"id_paths": [],
-"names": PackedStringArray("NewInventorySlot", "item_ui_holder", "custom_minimum_size", "anchors_preset", "anchor_right", "anchor_bottom", "grow_horizontal", "grow_vertical", "SlotUiNode", "PanelContainer", "layout_mode"),
+"id_paths": [PackedInt32Array()],
+"names": PackedStringArray("NewInventorySlot", "SlotUiNode", "item_ui_holder", "custom_minimum_size", "anchors_preset", "anchor_right", "anchor_bottom", "grow_horizontal", "grow_vertical", "PanelContainer", "PanelContainer", "custom_minimum_size", "layout_mode", "mouse_filter"),
 "node_count": 2,
 "node_ids": PackedInt32Array(1143441932, 1771070047),
-"node_paths": [],
-"nodes": PackedInt32Array(-1, -1, 8, 0, -1, 7, 1073741825, 0, 2, 1, 3, 2, 4, 3, 5, 3, 6, 4, 7, 4, 0, 0, 0, 9, 9, -1, 2, 2, 1, 10, 4, 0),
-"variants": [NodePath("PanelContainer"), Vector2(50, 50), 15, 1.0, 2],
+"node_paths": [NodePath(".")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 7, 1073741826, 0, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 8, 6, 0, 1073741824, 0, 10, 9, -1, 3, 11, 7, 12, 8, 13, 9, 0),
+"variants": [NodePath("PanelContainer"), Vector2(50, 50), 15, 1.0, 1.0, 2, 2, Vector2(50, 50), 2, 1],
 "version": 3
 }
 
@@ -68,13 +68,13 @@ _bundled = {
 "conn_count": 0,
 "conns": PackedInt32Array(),
 "editable_instances": [],
-"id_paths": [],
-"names": PackedStringArray("NewInventorySlot", "item_ui_holder", "custom_minimum_size", "anchors_preset", "anchor_right", "anchor_bottom", "grow_horizontal", "grow_vertical", "SlotUiNode", "PanelContainer", "layout_mode"),
+"id_paths": [PackedInt32Array()],
+"names": PackedStringArray("NewInventorySlot", "SlotUiNode", "item_ui_holder", "custom_minimum_size", "anchors_preset", "anchor_right", "anchor_bottom", "grow_horizontal", "grow_vertical", "PanelContainer", "PanelContainer", "custom_minimum_size", "layout_mode", "mouse_filter"),
 "node_count": 2,
 "node_ids": PackedInt32Array(1143441932, 1771070047),
-"node_paths": [],
-"nodes": PackedInt32Array(-1, -1, 8, 0, -1, 7, 1073741825, 0, 2, 1, 3, 2, 4, 3, 5, 3, 6, 4, 7, 4, 0, 0, 0, 9, 9, -1, 2, 2, 1, 10, 4, 0),
-"variants": [NodePath("PanelContainer"), Vector2(50, 50), 15, 1.0, 2],
+"node_paths": [NodePath(".")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 7, 1073741826, 0, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 8, 6, 0, 1073741824, 0, 10, 9, -1, 3, 11, 7, 12, 8, 13, 9, 0),
+"variants": [NodePath("PanelContainer"), Vector2(50, 50), 15, 1.0, 1.0, 2, 2, Vector2(50, 50), 2, 1],
 "version": 3
 }
 
@@ -86,13 +86,13 @@ _bundled = {
 "conn_count": 0,
 "conns": PackedInt32Array(),
 "editable_instances": [],
-"id_paths": [],
-"names": PackedStringArray("NewInventorySlot", "item_ui_holder", "custom_minimum_size", "anchors_preset", "anchor_right", "anchor_bottom", "grow_horizontal", "grow_vertical", "SlotUiNode", "PanelContainer", "layout_mode"),
+"id_paths": [PackedInt32Array()],
+"names": PackedStringArray("NewInventorySlot", "SlotUiNode", "item_ui_holder", "custom_minimum_size", "anchors_preset", "anchor_right", "anchor_bottom", "grow_horizontal", "grow_vertical", "PanelContainer", "PanelContainer", "custom_minimum_size", "layout_mode", "mouse_filter"),
 "node_count": 2,
 "node_ids": PackedInt32Array(1143441932, 1771070047),
-"node_paths": [],
-"nodes": PackedInt32Array(-1, -1, 8, 0, -1, 7, 1073741825, 0, 2, 1, 3, 2, 4, 3, 5, 3, 6, 4, 7, 4, 0, 0, 0, 9, 9, -1, 2, 2, 1, 10, 4, 0),
-"variants": [NodePath("PanelContainer"), Vector2(50, 50), 15, 1.0, 2],
+"node_paths": [NodePath(".")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 7, 1073741826, 0, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 8, 6, 0, 1073741824, 0, 10, 9, -1, 3, 11, 7, 12, 8, 13, 9, 0),
+"variants": [NodePath("PanelContainer"), Vector2(50, 50), 15, 1.0, 1.0, 2, 2, Vector2(50, 50), 2, 1],
 "version": 3
 }
 
@@ -104,18 +104,79 @@ _bundled = {
 "conn_count": 0,
 "conns": PackedInt32Array(),
 "editable_instances": [],
-"id_paths": [],
-"names": PackedStringArray("NewInventorySlot", "item_ui_holder", "custom_minimum_size", "anchors_preset", "anchor_right", "anchor_bottom", "grow_horizontal", "grow_vertical", "SlotUiNode", "PanelContainer", "layout_mode"),
+"id_paths": [PackedInt32Array()],
+"names": PackedStringArray("NewInventorySlot", "SlotUiNode", "item_ui_holder", "custom_minimum_size", "anchors_preset", "anchor_right", "anchor_bottom", "grow_horizontal", "grow_vertical", "PanelContainer", "PanelContainer", "custom_minimum_size", "layout_mode", "mouse_filter"),
 "node_count": 2,
 "node_ids": PackedInt32Array(1143441932, 1771070047),
-"node_paths": [],
-"nodes": PackedInt32Array(-1, -1, 8, 0, -1, 7, 1073741825, 0, 2, 1, 3, 2, 4, 3, 5, 3, 6, 4, 7, 4, 0, 0, 0, 9, 9, -1, 2, 2, 1, 10, 4, 0),
-"variants": [NodePath("PanelContainer"), Vector2(50, 50), 15, 1.0, 2],
+"node_paths": [NodePath(".")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 7, 1073741826, 0, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 8, 6, 0, 1073741824, 0, 10, 9, -1, 3, 11, 7, 12, 8, 13, 9, 0),
+"variants": [NodePath("PanelContainer"), Vector2(50, 50), 15, 1.0, 1.0, 2, 2, Vector2(50, 50), 2, 1],
 "version": 3
 }
 
 [sub_resource type="InventorySlot" id="InventorySlot_13elr"]
 slot_ui_scene = SubResource("PackedScene_ro7f3")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_boikl"]
+load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
+
+[sub_resource type="PackedScene" id="PackedScene_31n8c"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"id_paths": [],
+"names": PackedStringArray("NewInventoryItemUi", "ItemUiNode", "TextureRect", "offset_right", "offset_bottom", "texture", "stretch_mode"),
+"node_count": 2,
+"node_ids": PackedInt32Array(1859346978, 1536804251),
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 0, 0, 0, 0, 2, 2, -1, 4, 3, 0, 4, 0, 5, 1, 6, 2, 0),
+"variants": [128.0, SubResource("CompressedTexture2D_boikl"), 4],
+"version": 3
+}
+
+[sub_resource type="InventoryItem" id="InventoryItem_kgc3d"]
+item_ui_scene = SubResource("PackedScene_31n8c")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1veka"]
+load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
+
+[sub_resource type="PackedScene" id="PackedScene_n3vhu"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"id_paths": [PackedInt32Array()],
+"names": PackedStringArray("NewInventoryItemUi", "ItemUiNode", "item", "anchors_preset", "anchor_right", "anchor_bottom", "grow_horizontal", "grow_vertical", "TextureRect", "TextureRect", "layout_mode", "texture", "expand_mode", "stretch_mode"),
+"node_count": 2,
+"node_ids": PackedInt32Array(1859346978, 1536804251),
+"node_paths": [NodePath(".")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 6, 2, 0, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 0, 1073741824, 0, 9, 8, -1, 4, 10, 6, 11, 7, 12, 8, 13, 9, 0),
+"variants": [SubResource("InventoryItem_kgc3d"), 15, 1.0, 1.0, 2, 2, 2, SubResource("CompressedTexture2D_1veka"), 1, 5],
+"version": 3
+}
+
+[sub_resource type="InventoryItem" id="InventoryItem_0qvyo"]
+item_ui_scene = SubResource("PackedScene_n3vhu")
+
+[sub_resource type="PackedScene" id="PackedScene_vrydu"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"id_paths": [PackedInt32Array()],
+"names": PackedStringArray("NewInventorySlot", "SlotUiNode", "item_ui_holder", "custom_minimum_size", "anchors_preset", "anchor_right", "anchor_bottom", "grow_horizontal", "grow_vertical", "PanelContainer", "PanelContainer", "custom_minimum_size", "layout_mode", "mouse_filter"),
+"node_count": 2,
+"node_ids": PackedInt32Array(1143441932, 1771070047),
+"node_paths": [NodePath(".")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 7, 1073741826, 0, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 8, 6, 0, 1073741824, 0, 10, 9, -1, 3, 11, 7, 12, 8, 13, 9, 0),
+"variants": [NodePath("PanelContainer"), Vector2(50, 50), 15, 1.0, 1.0, 2, 2, Vector2(50, 50), 2, 1],
+"version": 3
+}
+
+[sub_resource type="InventorySlot" id="InventorySlot_cspph"]
+slot_ui_scene = SubResource("PackedScene_vrydu")
+item = SubResource("InventoryItem_0qvyo")
 
 [node name="Main" type="Node" unique_id=1172094202]
 
@@ -132,14 +193,18 @@ grow_vertical = 0
 slot = SubResource("InventorySlot_m7upb")
 layout_mode = 2
 
-[node name="NewInventorySlot2" parent="HBoxContainer" unique_id=844206807 instance=ExtResource("1_yfdjg")]
+[node name="NewInventorySlot2" parent="HBoxContainer" unique_id=402639232 instance=ExtResource("1_yfdjg")]
 slot = SubResource("InventorySlot_aoua3")
 layout_mode = 2
 
-[node name="NewInventorySlot3" parent="HBoxContainer" unique_id=2096960168 instance=ExtResource("1_yfdjg")]
+[node name="NewInventorySlot3" parent="HBoxContainer" unique_id=1334989316 instance=ExtResource("1_yfdjg")]
 slot = SubResource("InventorySlot_l40m6")
 layout_mode = 2
 
-[node name="NewInventorySlot4" parent="HBoxContainer" unique_id=722905075 instance=ExtResource("1_yfdjg")]
+[node name="NewInventorySlot4" parent="HBoxContainer" unique_id=683809090 instance=ExtResource("1_yfdjg")]
 slot = SubResource("InventorySlot_13elr")
+layout_mode = 2
+
+[node name="NewInventorySlot5" parent="HBoxContainer" unique_id=448681797 instance=ExtResource("1_yfdjg")]
+slot = SubResource("InventorySlot_cspph")
 layout_mode = 2

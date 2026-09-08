@@ -1,10 +1,13 @@
 #include "slot_ui_node.hpp"
+#include "godot_cpp/classes/control.hpp"
 #include "godot_cpp/classes/engine.hpp"
 #include "godot_cpp/classes/global_constants.hpp"
 #include "godot_cpp/classes/node.hpp"
 #include "godot_cpp/classes/ref.hpp"
+#include "godot_cpp/core/memory.hpp"
 #include "godot_cpp/variant/callable_method_pointer.hpp"
 #include "godot_cpp/variant/variant.hpp"
+#include "godot_cpp/variant/vector2.hpp"
 #include "node/item_ui_node.hpp"
 #include "resource/inventory_item.hpp"
 
@@ -65,4 +68,35 @@ void SlotUiNode::_update_item_ui() {
 
 	// Add item ui as child of item ui holder
 	item_ui_holder->add_child(item_ui, false);
+}
+
+Variant SlotUiNode::_get_drag_data(const Vector2 &p_position) {
+	if (slot.is_null())
+		return Variant();
+
+	set_drag_preview(_get_drag_preview());
+
+	return slot;
+}
+
+Control *SlotUiNode::_get_drag_preview() const {
+    const Vector2 size = Vector2(50, 50);
+    Control *holder = memnew(Control);
+    holder->add_child(duplicate());
+    holder->set_size(size);
+    holder->set_anchors_and_offsets_preset(PRESET_CENTER);
+    return holder;
+}
+
+bool SlotUiNode::_can_drop_data(const Vector2 &p_at_position, const Variant &p_data) const {
+	Ref<InventorySlot> other_slot = p_data;
+	return other_slot.is_valid() && other_slot != slot;
+}
+
+void SlotUiNode::_drop_data(const Vector2 &p_at_position, const Variant &p_data) {
+	Ref<InventorySlot> other_slot = p_data;
+	if (other_slot.is_null() || slot.is_null())
+		return;
+
+	other_slot->interact_item_from_slot(slot);
 }

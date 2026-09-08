@@ -19,6 +19,10 @@ run/main_scene="uid://nu0lvg7u16vs"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[display]
+
+window/stretch/mode="viewport"
+
 [dotnet]
 
 project/assembly_name="Test_Project"

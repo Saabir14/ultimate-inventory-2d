@@ -18,6 +18,7 @@ protected:
 	static void _bind_methods();
 
 	void _update_item_ui();
+	Control *_get_drag_preview() const;
 
 public:
 	void set_slot(Ref<InventorySlot> p_slot);
@@ -25,5 +26,9 @@ public:
 
 	void set_item_ui_holder(Node *p_holder);
 	Node *get_item_ui_holder() const;
+
+	Variant _get_drag_data(const Vector2 &p_position) override;
+	bool _can_drop_data(const Vector2 &p_position, const Variant &p_data) const override;
+	void _drop_data(const Vector2 &p_position, const Variant &p_data) override;
 };
 } //namespace godot
