@@ -13,17 +13,17 @@
 
 using namespace godot;
 
-void SlotUiNode::_bind_methods() {
-	ClassDB::bind_method(D_METHOD("set_slot", "slot"), &SlotUiNode::set_slot);
-	ClassDB::bind_method(D_METHOD("get_slot"), &SlotUiNode::get_slot);
+void InventorySlotUI::_bind_methods() {
+	ClassDB::bind_method(D_METHOD("set_slot", "slot"), &InventorySlotUI::set_slot);
+	ClassDB::bind_method(D_METHOD("get_slot"), &InventorySlotUI::get_slot);
 	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "slot", PROPERTY_HINT_RESOURCE_TYPE, "InventorySlot"), "set_slot", "get_slot");
 
-	ClassDB::bind_method(D_METHOD("set_item_ui_holder", "holder"), &SlotUiNode::set_item_ui_holder);
-	ClassDB::bind_method(D_METHOD("get_item_ui_holder"), &SlotUiNode::get_item_ui_holder);
+	ClassDB::bind_method(D_METHOD("set_item_ui_holder", "holder"), &InventorySlotUI::set_item_ui_holder);
+	ClassDB::bind_method(D_METHOD("get_item_ui_holder"), &InventorySlotUI::get_item_ui_holder);
 	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "item_ui_holder", PROPERTY_HINT_NODE_TYPE), "set_item_ui_holder", "get_item_ui_holder");
 }
 
-void SlotUiNode::set_slot(Ref<InventorySlot> p_slot) {
+void InventorySlotUI::set_slot(Ref<InventorySlot> p_slot) {
 	// If running in editor, create a deep duplicate to prevent recursion
 	if (p_slot.is_valid() && Engine::get_singleton()->is_editor_hint())
 		slot = p_slot->duplicate_deep(Resource::DEEP_DUPLICATE_ALL);
@@ -31,19 +31,19 @@ void SlotUiNode::set_slot(Ref<InventorySlot> p_slot) {
 		slot = p_slot;
 
 	if (slot.is_valid())
-		slot->connect("changed", callable_mp(this, &SlotUiNode::_update_item_ui));
+		slot->connect("changed", callable_mp(this, &InventorySlotUI::_update_item_ui));
 
 	_update_item_ui();
 }
-Ref<InventorySlot> SlotUiNode::get_slot() const { return slot; }
+Ref<InventorySlot> InventorySlotUI::get_slot() const { return slot; }
 
-void SlotUiNode::set_item_ui_holder(Node *p_holder) {
+void InventorySlotUI::set_item_ui_holder(Node *p_holder) {
 	item_ui_holder = p_holder;
 	_update_item_ui();
 }
-Node *SlotUiNode::get_item_ui_holder() const { return item_ui_holder; }
+Node *InventorySlotUI::get_item_ui_holder() const { return item_ui_holder; }
 
-void SlotUiNode::_update_item_ui() {
+void InventorySlotUI::_update_item_ui() {
 	if (item_ui_holder == nullptr)
 		return;
 
@@ -62,7 +62,7 @@ void SlotUiNode::_update_item_ui() {
 		return;
 
 	// Instantiate item ui scene
-	ItemUiNode *item_ui = item->instantiate_item_ui();
+	InventoryItemUI *item_ui = item->instantiate_item_ui();
 	if (item_ui == nullptr)
 		return;
 
@@ -70,7 +70,7 @@ void SlotUiNode::_update_item_ui() {
 	item_ui_holder->add_child(item_ui, false);
 }
 
-Variant SlotUiNode::_get_drag_data(const Vector2 &p_position) {
+Variant InventorySlotUI::_get_drag_data(const Vector2 &p_position) {
 	if (slot.is_null() || slot->get_item().is_null())
 		return Variant();
 
@@ -79,7 +79,7 @@ Variant SlotUiNode::_get_drag_data(const Vector2 &p_position) {
 	return slot;
 }
 
-Control *SlotUiNode::_get_drag_preview() {
+Control *InventorySlotUI::_get_drag_preview() {
     const Vector2 size = Vector2(50, 50);
     Control *holder = memnew(Control);
     holder->add_child(duplicate());
@@ -88,12 +88,12 @@ Control *SlotUiNode::_get_drag_preview() {
     return holder;
 }
 
-bool SlotUiNode::_can_drop_data(const Vector2 &p_at_position, const Variant &p_data) const {
+bool InventorySlotUI::_can_drop_data(const Vector2 &p_at_position, const Variant &p_data) const {
 	Ref<InventorySlot> other_slot = p_data;
 	return other_slot.is_valid() && other_slot != slot;
 }
 
-void SlotUiNode::_drop_data(const Vector2 &p_at_position, const Variant &p_data) {
+void InventorySlotUI::_drop_data(const Vector2 &p_at_position, const Variant &p_data) {
 	Ref<InventorySlot> other_slot = p_data;
 	if (other_slot.is_null() || slot.is_null())
 		return;

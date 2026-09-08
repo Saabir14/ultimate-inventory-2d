@@ -39,7 +39,7 @@ void InventorySlot::set_slot_ui_scene(const Ref<PackedScene> &p_scene) {
 
 	// Check type of root node
 	Node *node = p_scene->instantiate();
-	SlotUiNode *slot_node = Object::cast_to<SlotUiNode>(node);
+	InventorySlotUI *slot_node = Object::cast_to<InventorySlotUI>(node);
 	ERR_FAIL_COND_MSG(slot_node == nullptr, "set_slot_scene scene must have SlotNode as root node");
 	node->queue_free();
 
@@ -50,14 +50,14 @@ Ref<PackedScene> InventorySlot::get_slot_ui_scene() const { return slot_ui_scene
 // Instantiates a SlotNode from the slot_ui_scene
 // The root node will (must) be SlotNode
 // Instantiated root node will hold this slot resource as it's slot
-SlotUiNode *InventorySlot::instantiate_slot_ui(PackedScene::GenEditState p_edit_state) {
+InventorySlotUI *InventorySlot::instantiate_slot_ui(PackedScene::GenEditState p_edit_state) {
 	if (slot_ui_scene.is_null())
 		return nullptr;
 
 	Node *node = slot_ui_scene->instantiate(p_edit_state);
 
 	// node has to be SlotNode
-	SlotUiNode *slot_node = Object::cast_to<SlotUiNode>(node);
+	InventorySlotUI *slot_node = Object::cast_to<InventorySlotUI>(node);
 	if (slot_node == nullptr)
 		return nullptr;
 

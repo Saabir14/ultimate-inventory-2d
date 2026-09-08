@@ -2,29 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://bioamopp6syek" path="res://icon.svg" id="1_dfaed"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dfaed"]
-load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
+[sub_resource type="InventoryItem" id="InventoryItem_dfaed"]
 
-[sub_resource type="PackedScene" id="PackedScene_ofanw"]
-_bundled = {
-"conn_count": 0,
-"conns": PackedInt32Array(),
-"editable_instances": [],
-"id_paths": [],
-"names": PackedStringArray("NewInventoryItemUi", "ItemUiNode", "TextureRect", "offset_right", "offset_bottom", "texture", "stretch_mode"),
-"node_count": 2,
-"node_ids": PackedInt32Array(1859346978, 1536804251),
-"node_paths": [],
-"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 0, 0, 0, 0, 2, 2, -1, 4, 3, 0, 4, 0, 5, 1, 6, 2, 0),
-"variants": [128.0, SubResource("CompressedTexture2D_dfaed"), 4],
-"version": 3
-}
-
-[sub_resource type="InventoryItem" id="InventoryItem_ctmxx"]
-item_ui_scene = SubResource("PackedScene_ofanw")
-
-[node name="NewInventoryItemUi" type="ItemUiNode" unique_id=1859346978]
-item = SubResource("InventoryItem_ctmxx")
+[node name="NewInventoryItemUi" type="InventoryItemUI" unique_id=1938577759]
+item = SubResource("InventoryItem_dfaed")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

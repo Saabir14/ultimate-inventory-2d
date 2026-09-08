@@ -38,7 +38,7 @@ void InventoryItem::set_item_ui_scene(const Ref<PackedScene> &p_scene) {
 
 	// Check if p_scene contains ItemUiNode as root node
 	Node *node = p_scene->instantiate();
-	ItemUiNode *item_ui_node = Object::cast_to<ItemUiNode>(node);
+	InventoryItemUI *item_ui_node = Object::cast_to<InventoryItemUI>(node);
 	ERR_FAIL_COND_MSG(!item_ui_node, "set_item_ui_scene scene must have ItemUiNode as root node");
 	node->queue_free();
 
@@ -53,14 +53,14 @@ void InventoryItem::set_item_2d_scene(const Ref<PackedScene> &p_scene) {
 }
 Ref<PackedScene> InventoryItem::get_item_2d_scene() const { return item_2d_scene; }
 
-ItemUiNode *InventoryItem::instantiate_item_ui(PackedScene::GenEditState p_edit_state) {
+InventoryItemUI *InventoryItem::instantiate_item_ui(PackedScene::GenEditState p_edit_state) {
 	if (item_ui_scene.is_null())
 		return nullptr;
 
 	Node *node = item_ui_scene->instantiate(p_edit_state);
 
 	// node has to be ItemUiNode
-	ItemUiNode *item_ui_node = Object::cast_to<ItemUiNode>(node);
+	InventoryItemUI *item_ui_node = Object::cast_to<InventoryItemUI>(node);
 	if (item_ui_node == nullptr)
 		return nullptr;
 

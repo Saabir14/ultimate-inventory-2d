@@ -1,25 +1,27 @@
 [gd_scene format=3 uid="uid://cd0qnpyu08ust"]
 
-[sub_resource type="PackedScene" id="PackedScene_gt6j6"]
+[sub_resource type="InventorySlot" id="InventorySlot_gt6j6"]
+
+[sub_resource type="PackedScene" id="PackedScene_4lp6o"]
 _bundled = {
 "conn_count": 0,
 "conns": PackedInt32Array(),
 "editable_instances": [],
-"id_paths": [PackedInt32Array()],
-"names": PackedStringArray("NewInventorySlot", "SlotUiNode", "item_ui_holder", "custom_minimum_size", "anchors_preset", "anchor_right", "anchor_bottom", "grow_horizontal", "grow_vertical", "PanelContainer", "PanelContainer", "custom_minimum_size", "layout_mode", "mouse_filter"),
+"id_paths": [],
+"names": PackedStringArray("NewInventorySlot", "slot", "custom_minimum_size", "anchors_preset", "anchor_right", "anchor_bottom", "grow_horizontal", "grow_vertical", "InventorySlotUI", "PanelContainer", "layout_mode", "mouse_filter"),
 "node_count": 2,
-"node_ids": PackedInt32Array(1143441932, 1771070047),
-"node_paths": [NodePath(".")],
-"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 7, 1073741826, 0, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 8, 6, 0, 1073741824, 0, 10, 9, -1, 3, 11, 7, 12, 8, 13, 9, 0),
-"variants": [NodePath("PanelContainer"), Vector2(50, 50), 15, 1.0, 1.0, 2, 2, Vector2(50, 50), 2, 1],
+"node_ids": PackedInt32Array(526111489, 1771070047),
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 8, 0, -1, 7, 1, 0, 2, 1, 3, 2, 4, 3, 5, 3, 6, 4, 7, 4, 0, 0, 0, 9, 9, -1, 3, 2, 1, 10, 4, 11, 5, 0),
+"variants": [SubResource("InventorySlot_gt6j6"), Vector2(50, 50), 15, 1.0, 2, 1],
 "version": 3
 }
 
-[sub_resource type="InventorySlot" id="InventorySlot_4lp6o"]
-slot_ui_scene = SubResource("PackedScene_gt6j6")
+[sub_resource type="InventorySlot" id="InventorySlot_8x7de"]
+slot_ui_scene = SubResource("PackedScene_4lp6o")
 
-[node name="NewInventorySlot" type="SlotUiNode" unique_id=1143441932 node_paths=PackedStringArray("item_ui_holder")]
-slot = SubResource("InventorySlot_4lp6o")
+[node name="NewInventorySlot" type="InventorySlotUI" unique_id=526111489 node_paths=PackedStringArray("item_ui_holder")]
+slot = SubResource("InventorySlot_8x7de")
 item_ui_holder = NodePath("PanelContainer")
 custom_minimum_size = Vector2(50, 50)
 anchors_preset = 15
