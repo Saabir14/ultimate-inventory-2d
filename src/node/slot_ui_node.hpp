@@ -18,7 +18,7 @@ protected:
 	static void _bind_methods();
 
 	void _update_item_ui();
-	Control *_get_drag_preview() const;
+	Control *_get_drag_preview();
 
 public:
 	void set_slot(Ref<InventorySlot> p_slot);

@@ -79,7 +79,7 @@ Variant SlotUiNode::_get_drag_data(const Vector2 &p_position) {
 	return slot;
 }
 
-Control *SlotUiNode::_get_drag_preview() const {
+Control *SlotUiNode::_get_drag_preview() {
     const Vector2 size = Vector2(50, 50);
     Control *holder = memnew(Control);
     holder->add_child(duplicate());
