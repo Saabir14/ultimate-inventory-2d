@@ -71,7 +71,7 @@ void SlotUiNode::_update_item_ui() {
 }
 
 Variant SlotUiNode::_get_drag_data(const Vector2 &p_position) {
-	if (slot.is_null())
+	if (slot.is_null() || slot->get_item().is_null())
 		return Variant();
 
 	set_drag_preview(_get_drag_preview());
