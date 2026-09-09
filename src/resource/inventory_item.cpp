@@ -9,10 +9,6 @@ void InventoryItem::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("get_item_ui_scene"), &InventoryItem::get_item_ui_scene);
 	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "item_ui_scene", PROPERTY_HINT_RESOURCE_TYPE, "PackedScene"), "set_item_ui_scene", "get_item_ui_scene");
 
-	ClassDB::bind_method(D_METHOD("set_item_2d_scene", "item_2d_scene"), &InventoryItem::set_item_2d_scene);
-	ClassDB::bind_method(D_METHOD("get_item_2d_scene"), &InventoryItem::get_item_2d_scene);
-	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "item_2d_scene", PROPERTY_HINT_RESOURCE_TYPE, "PackedScene"), "set_item_2d_scene", "get_item_2d_scene");
-
 	ClassDB::bind_method(D_METHOD("instantiate_item_ui"), &InventoryItem::instantiate_item_ui, DEFVAL(0));
 
 	GDVIRTUAL_BIND(place, "item");
@@ -35,13 +31,6 @@ void InventoryItem::set_item_ui_scene(const Ref<PackedScene> &p_scene) {
 	item_ui_scene = p_scene;
 }
 Ref<PackedScene> InventoryItem::get_item_ui_scene() const { return item_ui_scene; }
-
-void InventoryItem::set_item_2d_scene(const Ref<PackedScene> &p_scene) {
-	// TODO: Check if p_scene contains Item2dNode as root node
-	//
-	item_2d_scene = p_scene;
-}
-Ref<PackedScene> InventoryItem::get_item_2d_scene() const { return item_2d_scene; }
 
 InventoryItemUI *InventoryItem::instantiate_item_ui(PackedScene::GenEditState p_edit_state) {
 	if (item_ui_scene.is_null())

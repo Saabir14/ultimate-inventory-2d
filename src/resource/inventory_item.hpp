@@ -25,9 +25,6 @@ public:
 	void set_item_ui_scene(const Ref<PackedScene> &p_scene);
 	Ref<PackedScene> get_item_ui_scene() const;
 
-	void set_item_2d_scene(const Ref<PackedScene> &p_scene);
-	Ref<PackedScene> get_item_2d_scene() const;
-
 	InventoryItemUI *instantiate_item_ui(PackedScene::GenEditState p_edit_state = PackedScene::GenEditState(0));
 
 	// Adds another item to this item
