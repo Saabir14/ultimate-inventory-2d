@@ -1,14 +1,3 @@
-#include "godot_cpp/classes/engine.hpp"
-#include "godot_cpp/classes/object.hpp"
-#include "godot_cpp/classes/scene_tree.hpp"
-#include "godot_cpp/classes/wrapped.hpp"
-#include "godot_cpp/core/class_db.hpp"
-#include "godot_cpp/core/error_macros.hpp"
-
-#include "godot_cpp/core/object.hpp"
-#include "godot_cpp/core/property_info.hpp"
-#include "godot_cpp/variant/variant.hpp"
-#include "inventory_slot.hpp"
 #include "node/slot_ui.hpp"
 
 using namespace godot;

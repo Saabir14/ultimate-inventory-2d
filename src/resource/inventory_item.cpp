@@ -1,15 +1,5 @@
 #include "inventory_item.hpp"
 
-#include "godot_cpp/classes/engine.hpp"
-#include "godot_cpp/classes/global_constants.hpp"
-#include "godot_cpp/classes/packed_scene.hpp"
-#include "godot_cpp/classes/ref.hpp"
-#include "godot_cpp/classes/resource.hpp"
-#include "godot_cpp/classes/wrapped.hpp"
-#include "godot_cpp/core/class_db.hpp"
-#include "godot_cpp/core/object.hpp"
-#include "godot_cpp/core/property_info.hpp"
-#include "godot_cpp/variant/variant.hpp"
 #include "node/item_ui.hpp"
 
 using namespace godot;

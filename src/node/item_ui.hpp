@@ -1,8 +1,8 @@
 #pragma once
 
-#include "godot_cpp/classes/margin_container.hpp"
-#include "resource/inventory_item.hpp"
+#include <godot_cpp/classes/margin_container.hpp>
 
+#include "resource/inventory_item.hpp"
 
 // ItemNode holds an item
 // Handles instantiating the UI scene of the item

@@ -1,15 +1,6 @@
 #include "slot_ui.hpp"
-#include "godot_cpp/classes/control.hpp"
-#include "godot_cpp/classes/engine.hpp"
-#include "godot_cpp/classes/global_constants.hpp"
-#include "godot_cpp/classes/node.hpp"
-#include "godot_cpp/classes/ref.hpp"
-#include "godot_cpp/core/memory.hpp"
-#include "godot_cpp/variant/callable_method_pointer.hpp"
-#include "godot_cpp/variant/variant.hpp"
-#include "godot_cpp/variant/vector2.hpp"
+
 #include "node/item_ui.hpp"
-#include "resource/inventory_item.hpp"
 
 using namespace godot;
 
@@ -24,11 +15,7 @@ void InventorySlotUI::_bind_methods() {
 }
 
 void InventorySlotUI::set_slot(Ref<InventorySlot> p_slot) {
-	// If running in editor, create a deep duplicate to prevent recursion
-	if (p_slot.is_valid() && Engine::get_singleton()->is_editor_hint())
-		slot = p_slot->duplicate_deep(Resource::DEEP_DUPLICATE_ALL);
-	else
-		slot = p_slot;
+	slot = p_slot;
 
 	if (slot.is_valid())
 		slot->connect("changed", callable_mp(this, &InventorySlotUI::_update_item_ui));

@@ -1,6 +1,5 @@
 #pragma once
 
-#include "godot_cpp/classes/resource.hpp"
 #include "resource/inventory_item.hpp"
 
 namespace godot {

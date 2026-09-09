@@ -1,8 +1,6 @@
 #pragma once
 
 #include "godot_cpp/classes/packed_scene.hpp"
-#include "godot_cpp/classes/ref.hpp"
-#include "godot_cpp/classes/resource.hpp"
 
 #include <godot_cpp/core/gdvirtual.gen.inc>
 
