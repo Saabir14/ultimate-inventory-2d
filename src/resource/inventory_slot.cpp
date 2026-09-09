@@ -9,7 +9,7 @@
 #include "godot_cpp/core/property_info.hpp"
 #include "godot_cpp/variant/variant.hpp"
 #include "inventory_slot.hpp"
-#include "node/slot_ui_node.hpp"
+#include "node/slot_ui.hpp"
 
 using namespace godot;
 
@@ -58,8 +58,10 @@ InventorySlotUI *InventorySlot::instantiate_slot_ui(PackedScene::GenEditState p_
 
 	// node has to be SlotNode
 	InventorySlotUI *slot_node = Object::cast_to<InventorySlotUI>(node);
-	if (slot_node == nullptr)
+	if (slot_node == nullptr) {
+		node->queue_free();
 		return nullptr;
+	}
 
 	slot_node->set_slot(this);
 	return slot_node;

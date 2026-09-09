@@ -10,7 +10,7 @@
 #include "godot_cpp/core/object.hpp"
 #include "godot_cpp/core/property_info.hpp"
 #include "godot_cpp/variant/variant.hpp"
-#include "node/item_ui_node.hpp"
+#include "node/item_ui.hpp"
 
 using namespace godot;
 

@@ -5,8 +5,8 @@
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/godot.hpp>
 
-#include "node/item_ui_node.hpp"
-#include "node/slot_ui_node.hpp"
+#include "node/item_ui.hpp"
+#include "node/slot_ui.hpp"
 
 #include "resource/inventory_item.hpp"
 #include "resource/inventory_slot.hpp"

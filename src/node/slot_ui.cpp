@@ -1,4 +1,4 @@
-#include "slot_ui_node.hpp"
+#include "slot_ui.hpp"
 #include "godot_cpp/classes/control.hpp"
 #include "godot_cpp/classes/engine.hpp"
 #include "godot_cpp/classes/global_constants.hpp"
@@ -8,7 +8,7 @@
 #include "godot_cpp/variant/callable_method_pointer.hpp"
 #include "godot_cpp/variant/variant.hpp"
 #include "godot_cpp/variant/vector2.hpp"
-#include "node/item_ui_node.hpp"
+#include "node/item_ui.hpp"
 #include "resource/inventory_item.hpp"
 
 using namespace godot;
