@@ -1,6 +1,7 @@
 #pragma once
 
 #include "godot_cpp/classes/margin_container.hpp"
+#include "resource/inventory_item.hpp"
 #include "resource/inventory_slot.hpp"
 
 namespace godot {
@@ -23,6 +24,9 @@ protected:
 public:
 	void set_slot(Ref<InventorySlot> p_slot);
 	Ref<InventorySlot> get_slot() const;
+
+	void set_item(Ref<InventoryItem> p_item);
+	Ref<InventoryItem> get_item() const;
 
 	void set_item_ui_holder(Node *p_holder);
 	Node *get_item_ui_holder() const;
