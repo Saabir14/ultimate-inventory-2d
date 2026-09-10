@@ -3,87 +3,23 @@
 [ext_resource type="PackedScene" uid="uid://cd0qnpyu08ust" path="res://resource/slot/new_inventory_slot.tscn" id="1_yfdjg"]
 [ext_resource type="InventoryItem" uid="uid://dfcqko0i0x86c" path="res://resource/inventory/new_inventory_item/new_inventory_item.tres" id="2_ik7bt"]
 
-[sub_resource type="InventorySlot" id="InventorySlot_wms8s"]
+[sub_resource type="InventorySlot" id="InventorySlot_ik7bt"]
+slot_ui_scene_path = &"uid://cd0qnpyu08ust"
+item = ExtResource("2_ik7bt")
+resource_local_to_scene = true
 
-[sub_resource type="PackedScene" id="PackedScene_g1q4x"]
-_bundled = {
-"conn_count": 0,
-"conns": PackedInt32Array(),
-"editable_instances": [],
-"id_paths": [],
-"names": PackedStringArray("NewInventorySlot", "slot", "custom_minimum_size", "anchors_preset", "anchor_right", "anchor_bottom", "grow_horizontal", "grow_vertical", "InventorySlotUI", "PanelContainer", "layout_mode", "mouse_filter"),
-"node_count": 2,
-"node_ids": PackedInt32Array(526111489, 1771070047),
-"node_paths": [],
-"nodes": PackedInt32Array(-1, -1, 8, 0, -1, 7, 1, 0, 2, 1, 3, 2, 4, 3, 5, 3, 6, 4, 7, 4, 0, 0, 0, 9, 9, -1, 3, 2, 1, 10, 4, 11, 5, 0),
-"variants": [SubResource("InventorySlot_wms8s"), Vector2(50, 50), 15, 1.0, 2, 1],
-"version": 3
-}
+[sub_resource type="InventorySlot" id="InventorySlot_wms8s"]
+slot_ui_scene_path = &"uid://cd0qnpyu08ust"
+resource_local_to_scene = true
+
+[sub_resource type="InventorySlot" id="InventorySlot_g1q4x"]
+slot_ui_scene_path = &"uid://cd0qnpyu08ust"
+item = ExtResource("2_ik7bt")
+resource_local_to_scene = true
 
 [sub_resource type="InventorySlot" id="InventorySlot_bf7fm"]
-slot_ui_scene = SubResource("PackedScene_g1q4x")
-item = ExtResource("2_ik7bt")
-
-[sub_resource type="InventorySlot" id="InventorySlot_x3l4o"]
-
-[sub_resource type="PackedScene" id="PackedScene_06ubn"]
-_bundled = {
-"conn_count": 0,
-"conns": PackedInt32Array(),
-"editable_instances": [],
-"id_paths": [],
-"names": PackedStringArray("NewInventorySlot", "slot", "custom_minimum_size", "anchors_preset", "anchor_right", "anchor_bottom", "grow_horizontal", "grow_vertical", "InventorySlotUI", "PanelContainer", "layout_mode", "mouse_filter"),
-"node_count": 2,
-"node_ids": PackedInt32Array(526111489, 1771070047),
-"node_paths": [],
-"nodes": PackedInt32Array(-1, -1, 8, 0, -1, 7, 1, 0, 2, 1, 3, 2, 4, 3, 5, 3, 6, 4, 7, 4, 0, 0, 0, 9, 9, -1, 3, 2, 1, 10, 4, 11, 5, 0),
-"variants": [SubResource("InventorySlot_x3l4o"), Vector2(50, 50), 15, 1.0, 2, 1],
-"version": 3
-}
-
-[sub_resource type="InventorySlot" id="InventorySlot_m7upb"]
-slot_ui_scene = SubResource("PackedScene_06ubn")
-
-[sub_resource type="InventorySlot" id="InventorySlot_8l5y5"]
-
-[sub_resource type="PackedScene" id="PackedScene_aoua3"]
-_bundled = {
-"conn_count": 0,
-"conns": PackedInt32Array(),
-"editable_instances": [],
-"id_paths": [],
-"names": PackedStringArray("NewInventorySlot", "slot", "custom_minimum_size", "anchors_preset", "anchor_right", "anchor_bottom", "grow_horizontal", "grow_vertical", "InventorySlotUI", "PanelContainer", "layout_mode", "mouse_filter"),
-"node_count": 2,
-"node_ids": PackedInt32Array(526111489, 1771070047),
-"node_paths": [],
-"nodes": PackedInt32Array(-1, -1, 8, 0, -1, 7, 1, 0, 2, 1, 3, 2, 4, 3, 5, 3, 6, 4, 7, 4, 0, 0, 0, 9, 9, -1, 3, 2, 1, 10, 4, 11, 5, 0),
-"variants": [SubResource("InventorySlot_8l5y5"), Vector2(50, 50), 15, 1.0, 2, 1],
-"version": 3
-}
-
-[sub_resource type="InventorySlot" id="InventorySlot_42ajp"]
-slot_ui_scene = SubResource("PackedScene_aoua3")
-
-[sub_resource type="InventorySlot" id="InventorySlot_l40m6"]
-
-[sub_resource type="PackedScene" id="PackedScene_ro7f3"]
-_bundled = {
-"conn_count": 0,
-"conns": PackedInt32Array(),
-"editable_instances": [],
-"id_paths": [],
-"names": PackedStringArray("NewInventorySlot", "slot", "custom_minimum_size", "anchors_preset", "anchor_right", "anchor_bottom", "grow_horizontal", "grow_vertical", "InventorySlotUI", "PanelContainer", "layout_mode", "mouse_filter"),
-"node_count": 2,
-"node_ids": PackedInt32Array(526111489, 1771070047),
-"node_paths": [],
-"nodes": PackedInt32Array(-1, -1, 8, 0, -1, 7, 1, 0, 2, 1, 3, 2, 4, 3, 5, 3, 6, 4, 7, 4, 0, 0, 0, 9, 9, -1, 3, 2, 1, 10, 4, 11, 5, 0),
-"variants": [SubResource("InventorySlot_l40m6"), Vector2(50, 50), 15, 1.0, 2, 1],
-"version": 3
-}
-
-[sub_resource type="InventorySlot" id="InventorySlot_13elr"]
-slot_ui_scene = SubResource("PackedScene_ro7f3")
-item = ExtResource("2_ik7bt")
+slot_ui_scene_path = &"uid://cd0qnpyu08ust"
+resource_local_to_scene = true
 
 [node name="Main" type="Node" unique_id=1172094202]
 
@@ -99,18 +35,18 @@ offset_right = 133.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="NewInventorySlot" parent="HBoxContainer" unique_id=526111489 instance=ExtResource("1_yfdjg")]
+[node name="NewInventorySlot3" parent="HBoxContainer" unique_id=526111489 instance=ExtResource("1_yfdjg")]
+slot = SubResource("InventorySlot_ik7bt")
+layout_mode = 2
+
+[node name="NewInventorySlot" parent="HBoxContainer" unique_id=488513029 instance=ExtResource("1_yfdjg")]
+slot = SubResource("InventorySlot_wms8s")
+layout_mode = 2
+
+[node name="NewInventorySlot2" parent="HBoxContainer" unique_id=668273512 instance=ExtResource("1_yfdjg")]
+slot = SubResource("InventorySlot_g1q4x")
+layout_mode = 2
+
+[node name="NewInventorySlot4" parent="HBoxContainer" unique_id=1774514405 instance=ExtResource("1_yfdjg")]
 slot = SubResource("InventorySlot_bf7fm")
-layout_mode = 2
-
-[node name="NewInventorySlot2" parent="HBoxContainer" unique_id=411080894 instance=ExtResource("1_yfdjg")]
-slot = SubResource("InventorySlot_m7upb")
-layout_mode = 2
-
-[node name="NewInventorySlot3" parent="HBoxContainer" unique_id=149735716 instance=ExtResource("1_yfdjg")]
-slot = SubResource("InventorySlot_42ajp")
-layout_mode = 2
-
-[node name="NewInventorySlot4" parent="HBoxContainer" unique_id=864698957 instance=ExtResource("1_yfdjg")]
-slot = SubResource("InventorySlot_13elr")
 layout_mode = 2

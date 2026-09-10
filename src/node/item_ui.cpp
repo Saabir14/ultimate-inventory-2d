@@ -11,5 +11,4 @@ void InventoryItemUI::_bind_methods() {
 }
 
 void InventoryItemUI::set_item(const Ref<InventoryItem> &p_item) { item = p_item; }
-
 Ref<InventoryItem> InventoryItemUI::get_item() const { return item; }

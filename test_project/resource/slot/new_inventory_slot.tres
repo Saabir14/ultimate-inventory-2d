@@ -1,6 +1,5 @@
 [gd_resource type="InventorySlot" format=3 uid="uid://rupexmlete3r"]
 
-[ext_resource type="PackedScene" uid="uid://cd0qnpyu08ust" path="res://resource/slot/new_inventory_slot.tscn" id="1_66m6q"]
-
 [resource]
-slot_ui_scene = ExtResource("1_66m6q")
+slot_ui_scene_path = &"uid://cd0qnpyu08ust"
+resource_local_to_scene = true

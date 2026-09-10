@@ -1,11 +1,13 @@
+#include "godot_cpp/classes/resource_loader.hpp"
+#include "godot_cpp/classes/resource_uid.hpp"
 #include "node/slot_ui.hpp"
 
 using namespace godot;
 
 void InventorySlot::_bind_methods() {
-	ClassDB::bind_method(D_METHOD("set_slot_ui_scene", "slot_scene"), &InventorySlot::set_slot_ui_scene);
-	ClassDB::bind_method(D_METHOD("get_slot_ui_scene"), &InventorySlot::get_slot_ui_scene);
-	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "slot_ui_scene", PROPERTY_HINT_RESOURCE_TYPE, "PackedScene"), "set_slot_ui_scene", "get_slot_ui_scene");
+	ClassDB::bind_method(D_METHOD("set_slot_ui_scene_path", "slot_scene_path"), &InventorySlot::set_slot_ui_scene_path);
+	ClassDB::bind_method(D_METHOD("get_slot_ui_scene_path"), &InventorySlot::get_slot_ui_scene_path);
+	ADD_PROPERTY(PropertyInfo(Variant::STRING, "slot_ui_scene_path", PROPERTY_HINT_FILE, "*.tscn, *.scn, *.res"), "set_slot_ui_scene_path", "get_slot_ui_scene_path");
 
 	ClassDB::bind_method(D_METHOD("set_item", "item"), &InventorySlot::set_item);
 	ClassDB::bind_method(D_METHOD("get_item"), &InventorySlot::get_item);
@@ -20,37 +22,21 @@ void InventorySlot::_bind_methods() {
 	GDVIRTUAL_BIND(_can_hold_item, "item");
 }
 
-void InventorySlot::set_slot_ui_scene(const Ref<PackedScene> &p_scene) {
-	if (p_scene.is_null()) {
-		slot_ui_scene = nullptr;
-		return;
-	}
+void InventorySlot::set_slot_ui_scene_path(const StringName scene_path) { slot_ui_scene_path = scene_path; }
+StringName InventorySlot::get_slot_ui_scene_path() const { return slot_ui_scene_path; }
 
-	// Check type of root node
-	Node *node = p_scene->instantiate();
-	InventorySlotUI *slot_node = Object::cast_to<InventorySlotUI>(node);
-	ERR_FAIL_COND_MSG(slot_node == nullptr, "set_slot_scene scene must have SlotNode as root node");
-	node->queue_free();
-
-	slot_ui_scene = p_scene;
-}
-Ref<PackedScene> InventorySlot::get_slot_ui_scene() const { return slot_ui_scene; }
-
-// Instantiates a SlotNode from the slot_ui_scene
-// The root node will (must) be SlotNode
-// Instantiated root node will hold this slot resource as it's slot
 InventorySlotUI *InventorySlot::instantiate_slot_ui(PackedScene::GenEditState p_edit_state) {
-	if (slot_ui_scene.is_null())
-		return nullptr;
+	const StringName path = ResourceUID::ensure_path(slot_ui_scene_path);
+	ERR_FAIL_COND_V_MSG(!ResourceLoader::get_singleton()->exists(path), nullptr, "No file found at " + path);
 
-	Node *node = slot_ui_scene->instantiate(p_edit_state);
+	const Ref<PackedScene> scene = ResourceLoader::get_singleton()->load(path);
+	ERR_FAIL_COND_V_MSG(!scene.is_valid(), nullptr, "File is not PackedScene at " + path);
+
+	Node *node = scene->instantiate(p_edit_state);
 
 	// node has to be SlotNode
 	InventorySlotUI *slot_node = Object::cast_to<InventorySlotUI>(node);
-	if (slot_node == nullptr) {
-		node->queue_free();
-		return nullptr;
-	}
+	ERR_FAIL_COND_V_MSG(!slot_node, nullptr, "No SlotUI as root node for PackedScene at " + path);
 
 	slot_node->set_slot(this);
 	return slot_node;

@@ -1,47 +1,40 @@
 #include "inventory_item.hpp"
 
+#include "godot_cpp/classes/global_constants.hpp"
+#include "godot_cpp/classes/resource_loader.hpp"
+#include "godot_cpp/classes/resource_uid.hpp"
+#include "godot_cpp/variant/string_name.hpp"
 #include "node/item_ui.hpp"
 
 using namespace godot;
 
 void InventoryItem::_bind_methods() {
-	ClassDB::bind_method(D_METHOD("set_item_ui_scene", "item_ui_scene"), &InventoryItem::set_item_ui_scene);
-	ClassDB::bind_method(D_METHOD("get_item_ui_scene"), &InventoryItem::get_item_ui_scene);
-	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "item_ui_scene", PROPERTY_HINT_RESOURCE_TYPE, "PackedScene"), "set_item_ui_scene", "get_item_ui_scene");
+	ClassDB::bind_method(D_METHOD("set_item_ui_scene_path", "item_ui_scene_path"), &InventoryItem::set_item_ui_scene_path);
+	ClassDB::bind_method(D_METHOD("get_item_ui_scene_path"), &InventoryItem::get_item_ui_scene_path);
+	ADD_PROPERTY(PropertyInfo(Variant::STRING, "item_ui_scene_path", PROPERTY_HINT_FILE, "*.tscn, *.scn, *.res"), "set_item_ui_scene_path", "get_item_ui_scene_path");
 
 	ClassDB::bind_method(D_METHOD("instantiate_item_ui"), &InventoryItem::instantiate_item_ui, DEFVAL(0));
 
 	GDVIRTUAL_BIND(place, "item");
 
-	// TODO: virtual bind all take functions
+	// TODO: virtual bind all take methods
 }
 
-void InventoryItem::set_item_ui_scene(const Ref<PackedScene> &p_scene) {
-	if (p_scene.is_null()) {
-		item_ui_scene = nullptr;
-		return;
-	}
-
-	// Check if p_scene contains ItemUiNode as root node
-	Node *node = p_scene->instantiate();
-	InventoryItemUI *item_ui_node = Object::cast_to<InventoryItemUI>(node);
-	ERR_FAIL_COND_MSG(!item_ui_node, "set_item_ui_scene scene must have ItemUiNode as root node");
-	node->queue_free();
-
-	item_ui_scene = p_scene;
-}
-Ref<PackedScene> InventoryItem::get_item_ui_scene() const { return item_ui_scene; }
+void InventoryItem::set_item_ui_scene_path(const StringName scene_path) { item_ui_scene_path = scene_path; }
+StringName InventoryItem::get_item_ui_scene_path() const { return item_ui_scene_path; }
 
 InventoryItemUI *InventoryItem::instantiate_item_ui(PackedScene::GenEditState p_edit_state) {
-	if (item_ui_scene.is_null())
-		return nullptr;
+	const StringName path = ResourceUID::ensure_path(item_ui_scene_path);
+	ERR_FAIL_COND_V_MSG(!ResourceLoader::get_singleton()->exists(path), nullptr, "No file found at " + path);
 
-	Node *node = item_ui_scene->instantiate(p_edit_state);
+	const Ref<PackedScene> scene = ResourceLoader::get_singleton()->load(path);
+	ERR_FAIL_COND_V_MSG(!scene.is_valid(), nullptr, "File is not PackedScene at " + path);
+
+	Node *node = scene->instantiate(p_edit_state);
 
 	// node has to be ItemUiNode
 	InventoryItemUI *item_ui_node = Object::cast_to<InventoryItemUI>(node);
-	if (item_ui_node == nullptr)
-		return nullptr;
+	ERR_FAIL_COND_V_MSG(!item_ui_node, nullptr, "No ItemUI as root node for PackedScene at " + path);
 
 	item_ui_node->set_item(this);
 	return item_ui_node;

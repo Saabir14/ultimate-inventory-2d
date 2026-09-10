@@ -1,5 +1,6 @@
 #pragma once
 
+#include "godot_cpp/variant/string_name.hpp"
 #include "resource/inventory_item.hpp"
 
 namespace godot {
@@ -13,7 +14,7 @@ class InventorySlot : public Resource {
 private:
 	// UI for InventorySlot
 	// UI for InventoryItem will be child of this
-	Ref<PackedScene> slot_ui_scene;
+	StringName slot_ui_scene_path;
 
 	// IvenentoryItem resource that stores item properties
 	Ref<InventoryItem> item;
@@ -22,8 +23,8 @@ protected:
 	static void _bind_methods();
 
 public:
-	void set_slot_ui_scene(const Ref<PackedScene> &p_scene);
-	Ref<PackedScene> get_slot_ui_scene() const;
+	void set_slot_ui_scene_path(const StringName scene_path);
+	StringName get_slot_ui_scene_path() const;
 
 	InventorySlotUI *instantiate_slot_ui(PackedScene::GenEditState p_edit_state = PackedScene::GEN_EDIT_STATE_DISABLED);
 

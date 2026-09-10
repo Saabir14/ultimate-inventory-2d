@@ -15,6 +15,9 @@ void InventorySlotUI::_bind_methods() {
 }
 
 void InventorySlotUI::set_slot(Ref<InventorySlot> p_slot) {
+    if (slot.is_valid())
+        slot->disconnect("changed", callable_mp(this, &InventorySlotUI::_update_item_ui));
+
 	slot = p_slot;
 
 	if (slot.is_valid())
