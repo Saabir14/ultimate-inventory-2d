@@ -1,5 +1,6 @@
 #include "slot_ui.hpp"
 
+#include "godot_cpp/classes/packed_scene.hpp"
 #include "node/item_ui.hpp"
 
 using namespace godot;
@@ -52,7 +53,7 @@ void InventorySlotUI::_update_item_ui() {
 		return;
 
 	// Instantiate item ui scene
-	InventoryItemUI *item_ui = item->instantiate_item_ui();
+	InventoryItemUI *item_ui = item->instantiate_item_ui(PackedScene::GEN_EDIT_STATE_INSTANCE);
 	if (item_ui == nullptr)
 		return;
 

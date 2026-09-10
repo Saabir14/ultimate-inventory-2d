@@ -3,22 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://cd0qnpyu08ust" path="res://resource/slot/new_inventory_slot.tscn" id="1_yfdjg"]
 [ext_resource type="InventoryItem" uid="uid://dfcqko0i0x86c" path="res://resource/inventory/new_inventory_item/new_inventory_item.tres" id="2_ik7bt"]
 
-[sub_resource type="InventorySlot" id="InventorySlot_ik7bt"]
+[sub_resource type="InventorySlot" id="InventorySlot_yfdjg"]
 slot_ui_scene_path = &"uid://cd0qnpyu08ust"
 item = ExtResource("2_ik7bt")
-resource_local_to_scene = true
-
-[sub_resource type="InventorySlot" id="InventorySlot_wms8s"]
-slot_ui_scene_path = &"uid://cd0qnpyu08ust"
-resource_local_to_scene = true
-
-[sub_resource type="InventorySlot" id="InventorySlot_g1q4x"]
-slot_ui_scene_path = &"uid://cd0qnpyu08ust"
-item = ExtResource("2_ik7bt")
-resource_local_to_scene = true
-
-[sub_resource type="InventorySlot" id="InventorySlot_bf7fm"]
-slot_ui_scene_path = &"uid://cd0qnpyu08ust"
 resource_local_to_scene = true
 
 [node name="Main" type="Node" unique_id=1172094202]
@@ -35,18 +22,6 @@ offset_right = 133.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="NewInventorySlot3" parent="HBoxContainer" unique_id=526111489 instance=ExtResource("1_yfdjg")]
-slot = SubResource("InventorySlot_ik7bt")
-layout_mode = 2
-
-[node name="NewInventorySlot" parent="HBoxContainer" unique_id=488513029 instance=ExtResource("1_yfdjg")]
-slot = SubResource("InventorySlot_wms8s")
-layout_mode = 2
-
-[node name="NewInventorySlot2" parent="HBoxContainer" unique_id=668273512 instance=ExtResource("1_yfdjg")]
-slot = SubResource("InventorySlot_g1q4x")
-layout_mode = 2
-
-[node name="NewInventorySlot4" parent="HBoxContainer" unique_id=1774514405 instance=ExtResource("1_yfdjg")]
-slot = SubResource("InventorySlot_bf7fm")
+[node name="NewInventorySlot" parent="HBoxContainer" unique_id=526111489 instance=ExtResource("1_yfdjg")]
+slot = SubResource("InventorySlot_yfdjg")
 layout_mode = 2
