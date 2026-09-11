@@ -1,6 +1,7 @@
 #pragma once
 
 #include "godot_cpp/classes/margin_container.hpp"
+#include "godot_cpp/classes/node.hpp"
 #include "resource/inventory_item.hpp"
 #include "resource/inventory_slot.hpp"
 
@@ -13,12 +14,15 @@ class InventorySlotUI : public MarginContainer {
 
 private:
 	Ref<InventorySlot> slot;
-	Node *item_ui_holder;
+	Node *item_ui_holder = nullptr;
+
+	InventoryItemUI *item_ui = nullptr;
+
+	void _update_ui();
 
 protected:
 	static void _bind_methods();
 
-	void _update_item_ui();
 	Control *_get_drag_preview();
 
 public:

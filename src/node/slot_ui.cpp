@@ -22,14 +22,14 @@ void InventorySlotUI::_bind_methods() {
 
 void InventorySlotUI::set_slot(Ref<InventorySlot> p_slot) {
 	if (slot.is_valid())
-		slot->disconnect("changed", callable_mp(this, &InventorySlotUI::_update_item_ui));
+		slot->disconnect("changed", callable_mp(this, &InventorySlotUI::_update_ui));
 
 	slot = p_slot;
 
 	if (slot.is_valid())
-		slot->connect("changed", callable_mp(this, &InventorySlotUI::_update_item_ui));
+		slot->connect("changed", callable_mp(this, &InventorySlotUI::_update_ui));
 
-	_update_item_ui();
+	_update_ui();
 }
 Ref<InventorySlot> InventorySlotUI::get_slot() const { return slot; }
 
@@ -45,19 +45,19 @@ Ref<InventoryItem> InventorySlotUI::get_item() const {
 
 void InventorySlotUI::set_item_ui_holder(Node *p_holder) {
 	item_ui_holder = p_holder;
-	_update_item_ui();
+	_update_ui();
 }
 Node *InventorySlotUI::get_item_ui_holder() const { return item_ui_holder; }
 
-void InventorySlotUI::_update_item_ui() {
+void InventorySlotUI::_update_ui() {
 	if (item_ui_holder == nullptr)
 		return;
 
-	// Free children
-	for (int32_t i = 0; i < item_ui_holder->get_child_count(); i++) {
-		Node *child = item_ui_holder->get_child(i);
-		item_ui_holder->remove_child(child);
-		child->queue_free();
+	// Free item ui
+	if (item_ui) {
+		item_ui_holder->remove_child(item_ui);
+		item_ui->queue_free();
+		item_ui = nullptr;
 	}
 
 	if (slot.is_null())
@@ -68,7 +68,7 @@ void InventorySlotUI::_update_item_ui() {
 		return;
 
 	// Instantiate item ui scene
-	InventoryItemUI *item_ui = item->instantiate_item_ui(PackedScene::GEN_EDIT_STATE_INSTANCE);
+	item_ui = item->instantiate_item_ui(PackedScene::GEN_EDIT_STATE_INSTANCE);
 	if (item_ui == nullptr)
 		return;
 
