@@ -1,43 +1,73 @@
 [gd_scene format=3 uid="uid://nu0lvg7u16vs"]
 
-[ext_resource type="PackedScene" uid="uid://cd0qnpyu08ust" path="res://resource/slot/new_inventory_slot.tscn" id="1_ik7bt"]
-[ext_resource type="InventoryItem" uid="uid://dfcqko0i0x86c" path="res://resource/items/new_inventory_item/new_inventory_item.tres" id="2_g1q4x"]
-[ext_resource type="Inventory" uid="uid://bu4e73xj2hr1l" path="res://resource/inventory/new_inventory.tres" id="4_bf7fm"]
-[ext_resource type="InventoryItem" uid="uid://dtv8b870chmug" path="res://resource/items/other_inventory_item/other_inventory_item.tres" id="4_x3l4o"]
+[ext_resource type="Inventory" uid="uid://bu4e73xj2hr1l" path="res://resource/inventory/new_inventory.tres" id="1_yfdjg"]
 
-[sub_resource type="InventorySlot" id="InventorySlot_g1q4x"]
-slot_ui_scene_path = &"uid://cd0qnpyu08ust"
-item = ExtResource("4_x3l4o")
-resource_local_to_scene = true
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_dlslu"]
 
-[sub_resource type="InventorySlot" id="InventorySlot_bf7fm"]
-slot_ui_scene_path = &"uid://cd0qnpyu08ust"
-item = ExtResource("2_g1q4x")
-resource_local_to_scene = true
+[sub_resource type="GDScript" id="GDScript_dlslu"]
+script/source = "extends CharacterBody2D
 
-[node name="Main" type="Node" unique_id=1172094202]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=316445589]
-anchors_preset = 7
-anchor_left = 0.5
+const SPEED = 300.0
+const JUMP_VELOCITY = -400.0
+
+
+func _physics_process(delta):
+	# Add the gravity.
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+
+	# Handle jump.
+	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	var direction = Input.get_axis(\"ui_left\", \"ui_right\")
+	if direction:
+		velocity.x = direction * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+
+	move_and_slide()
+"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dlslu"]
+radius = 20.0
+height = 60.0
+
+[node name="Main" type="Node2D" unique_id=240182838]
+
+[node name="Ground" type="StaticBody2D" parent="." unique_id=728992795]
+position = Vector2(576, 512)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=910508232]
+shape = SubResource("WorldBoundaryShape2D_dlslu")
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=737540076]
+position = Vector2(576, 480)
+script = SubResource("GDScript_dlslu")
+metadata/_edit_group_ = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Player" unique_id=991143294]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Player/CanvasLayer" unique_id=312601920]
+anchors_preset = 12
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -133.0
 offset_top = -50.0
-offset_right = 133.0
 grow_horizontal = 2
 grow_vertical = 0
+alignment = 1
 
-[node name="NewInventorySlot2" parent="HBoxContainer" unique_id=2023929177 instance=ExtResource("1_ik7bt")]
-item = ExtResource("4_x3l4o")
-slot = SubResource("InventorySlot_g1q4x")
-layout_mode = 2
+[node name="InventoryUI" type="InventoryUI" parent="Player/CanvasLayer/HBoxContainer" unique_id=559113549 node_paths=PackedStringArray("inventory_holder")]
+inventory_holder = NodePath("../../../InventoryHolder")
+inventory = ExtResource("1_yfdjg")
 
-[node name="InventoryUI" type="InventoryUI" parent="HBoxContainer" unique_id=917076784]
-inventory = ExtResource("4_bf7fm")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=1901496299]
+shape = SubResource("CapsuleShape2D_dlslu")
 
-[node name="NewInventorySlot3" parent="HBoxContainer" unique_id=526111489 instance=ExtResource("1_ik7bt")]
-item = ExtResource("2_g1q4x")
-slot = SubResource("InventorySlot_bf7fm")
-layout_mode = 2
+[node name="InventoryHolder" type="InventoryHolder" parent="Player" unique_id=407834178]
+inventory = ExtResource("1_yfdjg")

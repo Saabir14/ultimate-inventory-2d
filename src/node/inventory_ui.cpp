@@ -1,12 +1,18 @@
 #include "inventory_ui.hpp"
+#include "godot_cpp/classes/global_constants.hpp"
 #include "godot_cpp/classes/node.hpp"
 #include "godot_cpp/classes/object.hpp"
 #include "godot_cpp/classes/packed_scene.hpp"
+#include "godot_cpp/core/class_db.hpp"
 #include "node/slot_ui.hpp"
 
 using namespace godot;
 
 void InventoryUI::_bind_methods() {
+	ClassDB::bind_method(D_METHOD("set_inventory_holder", "inventory_holder"), &InventoryUI::set_inventory_holder);
+	ClassDB::bind_method(D_METHOD("get_inventory_holder"), &InventoryUI::get_inventory_holder);
+	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "inventory_holder", PROPERTY_HINT_NODE_TYPE, "InventoryHolder"), "set_inventory_holder", "get_inventory_holder");
+
 	ClassDB::bind_method(D_METHOD("set_inventory", "inventory"), &InventoryUI::set_inventory);
 	ClassDB::bind_method(D_METHOD("get_inventory"), &InventoryUI::get_inventory);
 	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "inventory", PROPERTY_HINT_RESOURCE_TYPE, "Inventory"), "set_inventory", "get_inventory");
@@ -49,6 +55,19 @@ void InventoryUI::set_inventory(const Ref<Inventory> &p_inventory) {
 	_update_ui();
 }
 Ref<Inventory> InventoryUI::get_inventory() const { return inventory; }
+
+void InventoryUI::set_inventory_holder(InventoryHolder *p_inventory_holder) {
+    if (inventory_holder)
+		inventory_holder->disconnect("inventory_set", callable_mp(this, &InventoryUI::set_inventory));
+
+	inventory_holder = p_inventory_holder;
+	set_inventory(p_inventory_holder->get_inventory());
+
+	if (inventory_holder)
+		inventory_holder->connect("inventory_set", callable_mp(this, &InventoryUI::set_inventory));
+}
+InventoryHolder *InventoryUI::get_inventory_holder() const { return inventory_holder; }
+
 
 void InventoryUI::_queue_free_slot_ui_nodes() {
 	for (int64_t i = 0; i < slot_ui_nodes.size(); i++) {

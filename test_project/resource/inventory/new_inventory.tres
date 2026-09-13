@@ -1,7 +1,9 @@
 [gd_resource type="Inventory" format=3 uid="uid://bu4e73xj2hr1l"]
 
 [ext_resource type="InventorySlot" uid="uid://rupexmlete3r" path="res://resource/slot/new_inventory_slot.tres" id="1_3vyoh"]
+[ext_resource type="InventoryItem" uid="uid://dfcqko0i0x86c" path="res://resource/items/new_inventory_item/new_inventory_item.tres" id="1_qj0c7"]
+[ext_resource type="InventoryItem" uid="uid://dtv8b870chmug" path="res://resource/items/other_inventory_item/other_inventory_item.tres" id="2_4cnl4"]
 
 [resource]
 slot = ExtResource("1_3vyoh")
-items = Array[InventoryItem]([null, null, null, null, null])
+items = Array[InventoryItem]([ExtResource("1_qj0c7"), ExtResource("2_4cnl4"), null, null, null])
