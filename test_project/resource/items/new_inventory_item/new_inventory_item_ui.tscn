@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://c7k8ab1pldb28"]
 
-[ext_resource type="Texture2D" uid="uid://bioamopp6syek" path="res://icon.svg" id="1_dfaed"]
-[ext_resource type="InventoryItem" uid="uid://dfcqko0i0x86c" path="res://resource/inventory/new_inventory_item/new_inventory_item.tres" id="1_ofanw"]
+[ext_resource type="InventoryItem" uid="uid://dfcqko0i0x86c" path="res://resource/items/new_inventory_item/new_inventory_item.tres" id="1_8ovch"]
+[ext_resource type="Texture2D" uid="uid://bioamopp6syek" path="res://icon.svg" id="2_vr5hw"]
 
 [node name="NewInventoryItemUi" type="InventoryItemUI" unique_id=1938577759]
-item = ExtResource("1_ofanw")
+item = ExtResource("1_8ovch")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -13,6 +13,6 @@ grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1536804251]
 layout_mode = 2
-texture = ExtResource("1_dfaed")
+texture = ExtResource("2_vr5hw")
 expand_mode = 1
 stretch_mode = 5

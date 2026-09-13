@@ -1,0 +1,4 @@
+[gd_resource type="InventoryItem" format=3 uid="uid://dtv8b870chmug"]
+
+[resource]
+item_ui_scene_path = &"uid://bwvn44vwva8vm"

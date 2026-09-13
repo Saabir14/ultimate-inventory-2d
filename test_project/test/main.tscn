@@ -1,16 +1,23 @@
 [gd_scene format=3 uid="uid://nu0lvg7u16vs"]
 
-[ext_resource type="PackedScene" uid="uid://cd0qnpyu08ust" path="res://resource/slot/new_inventory_slot.tscn" id="1_yfdjg"]
-[ext_resource type="InventoryItem" uid="uid://dfcqko0i0x86c" path="res://resource/inventory/new_inventory_item/new_inventory_item.tres" id="2_ik7bt"]
+[ext_resource type="PackedScene" uid="uid://cd0qnpyu08ust" path="res://resource/slot/new_inventory_slot.tscn" id="1_ik7bt"]
+[ext_resource type="InventoryItem" uid="uid://dfcqko0i0x86c" path="res://resource/items/new_inventory_item/new_inventory_item.tres" id="2_g1q4x"]
+[ext_resource type="Inventory" uid="uid://bu4e73xj2hr1l" path="res://resource/inventory/new_inventory.tres" id="4_bf7fm"]
+[ext_resource type="InventoryItem" uid="uid://dtv8b870chmug" path="res://resource/items/other_inventory_item/other_inventory_item.tres" id="4_x3l4o"]
 
-[sub_resource type="InventorySlot" id="InventorySlot_yfdjg"]
+[sub_resource type="InventorySlot" id="InventorySlot_g1q4x"]
 slot_ui_scene_path = &"uid://cd0qnpyu08ust"
-item = ExtResource("2_ik7bt")
+item = ExtResource("4_x3l4o")
+resource_local_to_scene = true
+
+[sub_resource type="InventorySlot" id="InventorySlot_bf7fm"]
+slot_ui_scene_path = &"uid://cd0qnpyu08ust"
+item = ExtResource("2_g1q4x")
 resource_local_to_scene = true
 
 [node name="Main" type="Node" unique_id=1172094202]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=734131737]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=316445589]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -22,6 +29,15 @@ offset_right = 133.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="NewInventorySlot" parent="HBoxContainer" unique_id=526111489 instance=ExtResource("1_yfdjg")]
-slot = SubResource("InventorySlot_yfdjg")
+[node name="NewInventorySlot2" parent="HBoxContainer" unique_id=2023929177 instance=ExtResource("1_ik7bt")]
+item = ExtResource("4_x3l4o")
+slot = SubResource("InventorySlot_g1q4x")
+layout_mode = 2
+
+[node name="InventoryUI" type="InventoryUI" parent="HBoxContainer" unique_id=917076784]
+inventory = ExtResource("4_bf7fm")
+
+[node name="NewInventorySlot3" parent="HBoxContainer" unique_id=526111489 instance=ExtResource("1_ik7bt")]
+item = ExtResource("2_g1q4x")
+slot = SubResource("InventorySlot_bf7fm")
 layout_mode = 2

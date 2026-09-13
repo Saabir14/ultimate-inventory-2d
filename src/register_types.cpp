@@ -5,9 +5,11 @@
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/godot.hpp>
 
+#include "node/inventory_ui.hpp"
 #include "node/item_ui.hpp"
 #include "node/slot_ui.hpp"
 
+#include "resource/inventory.hpp"
 #include "resource/inventory_item.hpp"
 #include "resource/inventory_slot.hpp"
 
@@ -22,10 +24,12 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level) {
 	// Resources
 	GDREGISTER_CLASS(InventoryItem)
 	GDREGISTER_CLASS(InventorySlot)
+	GDREGISTER_CLASS(Inventory)
 
 	// Nodes
 	GDREGISTER_CLASS(InventorySlotUI)
 	GDREGISTER_CLASS(InventoryItemUI)
+	GDREGISTER_CLASS(InventoryUI)
 }
 
 void uninitialize_gdextension_types(ModuleInitializationLevel p_level) {

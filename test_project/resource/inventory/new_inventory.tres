@@ -1,0 +1,7 @@
+[gd_resource type="Inventory" format=3 uid="uid://bu4e73xj2hr1l"]
+
+[ext_resource type="InventorySlot" uid="uid://rupexmlete3r" path="res://resource/slot/new_inventory_slot.tres" id="1_3vyoh"]
+
+[resource]
+slot = ExtResource("1_3vyoh")
+items = Array[InventoryItem]([null, null, null, null, null])

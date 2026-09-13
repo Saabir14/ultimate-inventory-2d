@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bwvn44vwva8vm"]
+
+[ext_resource type="InventoryItem" uid="uid://dfcqko0i0x86c" path="res://resource/items/new_inventory_item/new_inventory_item.tres" id="1_ihh45"]
+[ext_resource type="Texture2D" uid="uid://bioamopp6syek" path="res://icon.svg" id="2_g7fh4"]
+
+[node name="NewInventoryItemUi" type="InventoryItemUI" unique_id=1938577759]
+item = ExtResource("1_ihh45")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1536804251]
+modulate = Color(1, 0.49803922, 0, 1)
+layout_mode = 2
+texture = ExtResource("2_g7fh4")
+expand_mode = 1
+stretch_mode = 5
