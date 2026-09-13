@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://nu0lvg7u16vs"]
 
-[ext_resource type="Inventory" uid="uid://bu4e73xj2hr1l" path="res://resource/inventory/new_inventory.tres" id="1_yfdjg"]
+[ext_resource type="Inventory" uid="uid://bu4e73xj2hr1l" path="res://resource/inventory/new_inventory.tres" id="2_ik7bt"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_dlslu"]
 
@@ -64,10 +64,10 @@ alignment = 1
 
 [node name="InventoryUI" type="InventoryUI" parent="Player/CanvasLayer/HBoxContainer" unique_id=559113549 node_paths=PackedStringArray("inventory_holder")]
 inventory_holder = NodePath("../../../InventoryHolder")
-inventory = ExtResource("1_yfdjg")
+inventory = ExtResource("2_ik7bt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=1901496299]
 shape = SubResource("CapsuleShape2D_dlslu")
 
 [node name="InventoryHolder" type="InventoryHolder" parent="Player" unique_id=407834178]
-inventory = ExtResource("1_yfdjg")
+inventory = ExtResource("2_ik7bt")

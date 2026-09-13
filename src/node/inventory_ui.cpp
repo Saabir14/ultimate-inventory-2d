@@ -65,20 +65,19 @@ void InventoryUI::set_inventory_holder(InventoryHolder *p_inventory_holder) {
 	if (inventory_holder == p_inventory_holder)
 		return;
 
-    if (inventory_holder)
+	if (inventory_holder)
 		inventory_holder->disconnect("inventory_set", callable_mp(this, &InventoryUI::set_inventory));
 
 	inventory_holder = p_inventory_holder;
-	if (inventory_holder)
-		set_inventory(p_inventory_holder->get_inventory());
-	else
+	if (!inventory_holder) {
 		set_inventory(nullptr);
+		return;
+	}
 
-	if (inventory_holder)
-		inventory_holder->connect("inventory_set", callable_mp(this, &InventoryUI::set_inventory));
+	set_inventory(p_inventory_holder->get_inventory());
+	inventory_holder->connect("inventory_set", callable_mp(this, &InventoryUI::set_inventory));
 }
 InventoryHolder *InventoryUI::get_inventory_holder() const { return inventory_holder; }
-
 
 void InventoryUI::_queue_free_slot_ui_nodes() {
 	for (int64_t i = 0; i < slot_ui_nodes.size(); i++) {
