@@ -44,10 +44,15 @@ void InventoryUI::_notification(int p_what) {
 }
 
 void InventoryUI::set_inventory(const Ref<Inventory> &p_inventory) {
+	if (inventory == p_inventory)
+		return;
+
 	if (inventory.is_valid())
 		inventory->disconnect("changed", callable_mp(this, &InventoryUI::_update_ui));
 
 	inventory = p_inventory;
+	if (inventory_holder)
+		inventory_holder->set_inventory(p_inventory);
 
 	if (inventory.is_valid())
 		inventory->connect("changed", callable_mp(this, &InventoryUI::_update_ui));
@@ -57,11 +62,17 @@ void InventoryUI::set_inventory(const Ref<Inventory> &p_inventory) {
 Ref<Inventory> InventoryUI::get_inventory() const { return inventory; }
 
 void InventoryUI::set_inventory_holder(InventoryHolder *p_inventory_holder) {
+	if (inventory_holder == p_inventory_holder)
+		return;
+
     if (inventory_holder)
 		inventory_holder->disconnect("inventory_set", callable_mp(this, &InventoryUI::set_inventory));
 
 	inventory_holder = p_inventory_holder;
-	set_inventory(p_inventory_holder->get_inventory());
+	if (inventory_holder)
+		set_inventory(p_inventory_holder->get_inventory());
+	else
+		set_inventory(nullptr);
 
 	if (inventory_holder)
 		inventory_holder->connect("inventory_set", callable_mp(this, &InventoryUI::set_inventory));

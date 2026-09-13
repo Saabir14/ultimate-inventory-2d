@@ -7,3 +7,4 @@
 [resource]
 slot = ExtResource("1_3vyoh")
 items = Array[InventoryItem]([ExtResource("1_qj0c7"), ExtResource("2_4cnl4"), null, null, null])
+resource_local_to_scene = true
