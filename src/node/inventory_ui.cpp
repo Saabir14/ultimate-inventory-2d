@@ -1,9 +1,9 @@
 #include "inventory_ui.hpp"
-#include "godot_cpp/classes/global_constants.hpp"
 #include "godot_cpp/classes/node.hpp"
 #include "godot_cpp/classes/object.hpp"
 #include "godot_cpp/classes/packed_scene.hpp"
 #include "godot_cpp/core/class_db.hpp"
+#include "godot_cpp/core/error_macros.hpp"
 #include "node/slot_ui.hpp"
 
 using namespace godot;
@@ -47,12 +47,13 @@ void InventoryUI::set_inventory(const Ref<Inventory> &p_inventory) {
 	if (inventory == p_inventory)
 		return;
 
+	if (!inventory_holder)
+		return;
+
 	if (inventory.is_valid())
 		inventory->disconnect("changed", callable_mp(this, &InventoryUI::_update_ui));
 
 	inventory = p_inventory;
-	if (inventory_holder)
-		inventory_holder->set_inventory(p_inventory);
 
 	if (inventory.is_valid())
 		inventory->connect("changed", callable_mp(this, &InventoryUI::_update_ui));
@@ -69,8 +70,13 @@ void InventoryUI::set_inventory_holder(InventoryHolder *p_inventory_holder) {
 		inventory_holder->disconnect("inventory_set", callable_mp(this, &InventoryUI::set_inventory));
 
 	inventory_holder = p_inventory_holder;
+
 	if (!inventory_holder) {
-		set_inventory(nullptr);
+		if (inventory.is_valid()) {
+			inventory->disconnect("changed", callable_mp(this, &InventoryUI::_update_ui));
+			inventory.unref();
+		}
+		_queue_free_slot_ui_nodes();
 		return;
 	}
 
@@ -80,9 +86,8 @@ void InventoryUI::set_inventory_holder(InventoryHolder *p_inventory_holder) {
 InventoryHolder *InventoryUI::get_inventory_holder() const { return inventory_holder; }
 
 void InventoryUI::_queue_free_slot_ui_nodes() {
-	for (int64_t i = 0; i < slot_ui_nodes.size(); i++) {
-		Node *node = Object::cast_to<Node>(slot_ui_nodes[i]);
-		if (node)
+	for (Variant slot_node : slot_ui_nodes) {
+		if (Node *node = Object::cast_to<Node>(slot_node))
 			node->queue_free();
 	}
 	slot_ui_nodes.clear();
