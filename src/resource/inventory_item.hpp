@@ -36,15 +36,19 @@ public:
 
 	// Implement custom item splitting behaviour
 	virtual Ref<InventoryItem> take(int n = 1);
+	GDVIRTUAL1RC(Ref<InventoryItem>, take, int);
 
 	// Implement custom item splitting behaviour
 	virtual Ref<InventoryItem> take_half();
+	GDVIRTUAL0RC(Ref<InventoryItem>, take_half);
 
 	// Implement custom item splitting behaviour
 	virtual Ref<InventoryItem> take_one();
+	GDVIRTUAL0RC(Ref<InventoryItem>, take_one);
 
 	// Implement custom item splitting behaviour
 	virtual Ref<InventoryItem> take_all();
+	GDVIRTUAL0RC(Ref<InventoryItem>, take_all);
 };
 
 } //namespace godot

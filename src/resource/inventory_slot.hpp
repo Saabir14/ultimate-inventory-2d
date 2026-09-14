@@ -19,6 +19,11 @@ private:
 	// IvenentoryItem resource that stores item properties
 	Ref<InventoryItem> item;
 
+	// Rakes an inventory item as input
+	// Returns true if the item can be held in this slot otherwise false
+	// Override to restrict what items can be held
+	virtual bool _can_hold_item(const Ref<InventoryItem> &p_item);
+
 protected:
 	static void _bind_methods();
 
@@ -31,14 +36,10 @@ public:
 	void set_item(const Ref<InventoryItem> &p_item);
 	Ref<InventoryItem> get_item() const;
 
-	// Rakes an inventory item as input
-	// Returns true if the item can be held in this slot otherwise false
-	// Override to restrict what items can be held
-	virtual bool _can_hold_item(const Ref<InventoryItem> &p_item);
 	GDVIRTUAL1RC(bool, _can_hold_item, Ref<InventoryItem>);
 
 	// Takes an inventory item as input
-	//
+	// Returns true if the item was placed in slot otherwise false
 	bool place_item(const Ref<InventoryItem> &p_item);
 
 	// Takes an inventory slot as input

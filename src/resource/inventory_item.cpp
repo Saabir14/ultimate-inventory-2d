@@ -16,8 +16,10 @@ void InventoryItem::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("instantiate_item_ui"), &InventoryItem::instantiate_item_ui, DEFVAL(0));
 
 	GDVIRTUAL_BIND(place, "item");
-
-	// TODO: virtual bind all take methods
+	GDVIRTUAL_BIND(take, "n");
+	GDVIRTUAL_BIND(take_half);
+	GDVIRTUAL_BIND(take_one);
+	GDVIRTUAL_BIND(take_all);
 }
 
 void InventoryItem::set_item_ui_scene_path(const StringName scene_path) { item_ui_scene_path = scene_path; }
