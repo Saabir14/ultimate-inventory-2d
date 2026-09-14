@@ -69,5 +69,6 @@ inventory = ExtResource("2_ik7bt")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=1901496299]
 shape = SubResource("CapsuleShape2D_dlslu")
 
-[node name="InventoryHolder" type="InventoryHolder" parent="Player" unique_id=407834178]
+[node name="InventoryHolder" type="InventoryHolder" parent="Player" unique_id=407834178 node_paths=PackedStringArray("attached_node")]
+attached_node = NodePath("..")
 inventory = ExtResource("2_ik7bt")
