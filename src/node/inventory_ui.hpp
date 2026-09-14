@@ -12,7 +12,7 @@ class InventoryUI : public Node {
 
 private:
     // InventoryHolder reference to get the inventory
-	InventoryHolder *inventory_holder;
+	InventoryHolder *inventory_holder = nullptr;
 	// Inventory reference
    	Ref<Inventory> inventory;
 

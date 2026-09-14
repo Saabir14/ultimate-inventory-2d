@@ -8,7 +8,7 @@ class InventoryHolder : public Node {
 	GDCLASS(InventoryHolder, Node)
 
 private:
-	Node *attached_node;
+	Node *attached_node = nullptr;
 	bool use_parent_as_attached_node = true;
 
 	Ref<Inventory> inventory;
