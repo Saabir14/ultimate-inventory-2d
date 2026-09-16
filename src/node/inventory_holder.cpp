@@ -29,7 +29,7 @@ void InventoryHolder::set_attached_node(Node *p_node) {
 		return;
 
 	attached_node = p_node;
-	use_parent_as_attached_node = false;
+	use_parent_as_attached_node = get_parent() == attached_node;
 }
 Node *InventoryHolder::get_attached_node() const { return attached_node; }
 
