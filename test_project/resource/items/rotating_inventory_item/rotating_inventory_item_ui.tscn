@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://yrd6lrgpm04i"]
+
+[ext_resource type="Texture2D" uid="uid://bioamopp6syek" path="res://icon.svg" id="1_ucw5q"]
+
+[sub_resource type="InventoryItem" id="InventoryItem_ui70c"]
+item_ui_scene_path = &"res://resource/items/other_inventory_item/item_process_inventory_item_ui.tscn"
+
+[sub_resource type="GDScript" id="GDScript_ui70c"]
+script/source = "extends TextureRect
+
+@export var new_inventory_item_ui: InventoryItemUI
+@onready var rotating_item: RotatingInventoryItem = new_inventory_item_ui.item
+
+func _ready():
+	rotating_item.changed.connect(_on_change);
+
+func _on_change():
+	rotation_degrees = rotating_item.rotation
+"
+
+[node name="NewInventoryItemUi" type="InventoryItemUI" unique_id=1938577759]
+item = SubResource("InventoryItem_ui70c")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1536804251 node_paths=PackedStringArray("new_inventory_item_ui")]
+self_modulate = Color(1, 0, 0.627451, 1)
+layout_mode = 2
+texture = ExtResource("1_ucw5q")
+expand_mode = 1
+stretch_mode = 5
+script = SubResource("GDScript_ui70c")
+new_inventory_item_ui = NodePath("..")
