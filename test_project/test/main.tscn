@@ -48,7 +48,6 @@ shape = SubResource("WorldBoundaryShape2D_dlslu")
 [node name="Player" type="CharacterBody2D" parent="." unique_id=737540076]
 position = Vector2(576, 480)
 script = SubResource("GDScript_dlslu")
-metadata/_edit_group_ = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Player" unique_id=991143294]
 

@@ -13,6 +13,7 @@ class InventoryItemUI : public MarginContainer {
 
 private:
 	Ref<InventoryItem> item;
+	void _on_item_ui_scene_path_set(const StringName &p_scene_path);
 
 protected:
 	static void _bind_methods();
