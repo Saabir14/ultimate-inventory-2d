@@ -86,7 +86,7 @@ Variant InventorySlotUI::_get_drag_data(const Vector2 &p_position) {
 }
 
 Control *InventorySlotUI::_get_drag_preview() {
-	const Vector2 size = Vector2(50, 50);
+	const Vector2 size = get_custom_minimum_size();
 	Control *holder = memnew(Control);
 	holder->add_child(duplicate());
 	holder->set_size(size);
