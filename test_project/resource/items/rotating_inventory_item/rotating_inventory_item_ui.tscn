@@ -5,7 +5,7 @@
 [sub_resource type="GDScript" id="GDScript_ui70c"]
 script/source = "extends TextureRect
 
-@export var new_inventory_item_ui: InventoryItemUI
+@export var new_inventory_item_ui: ItemUI
 @onready var rotating_item: RotatingInventoryItem = new_inventory_item_ui.item
 
 func _ready():
@@ -15,12 +15,17 @@ func _on_change():
 	rotation_degrees = rotating_item.rotation
 "
 
-[node name="NewItemUi" type="InventoryUI" unique_id=1186565865]
+[node name="NewItemUi" type="ItemUI" unique_id=93208879]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1536804251 node_paths=PackedStringArray("new_inventory_item_ui")]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1536804251]
 self_modulate = Color(1, 0, 0.627451, 1)
+layout_mode = 2
 texture = ExtResource("1_ucw5q")
 expand_mode = 1
 stretch_mode = 5
 script = SubResource("GDScript_ui70c")
-new_inventory_item_ui = NodePath("")

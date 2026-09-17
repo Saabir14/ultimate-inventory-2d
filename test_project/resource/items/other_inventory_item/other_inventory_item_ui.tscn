@@ -2,10 +2,16 @@
 
 [ext_resource type="Texture2D" uid="uid://bioamopp6syek" path="res://icon.svg" id="2_g7fh4"]
 
-[node name="NewItemUi" type="InventoryUI" unique_id=756751296]
+[node name="NewItemUi" type="ItemUI" unique_id=1421925240]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1536804251]
 modulate = Color(1, 0.49803922, 0, 1)
+layout_mode = 2
 texture = ExtResource("2_g7fh4")
 expand_mode = 1
 stretch_mode = 5

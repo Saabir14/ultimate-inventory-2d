@@ -2,8 +2,9 @@
 
 [ext_resource type="InventorySlot" uid="uid://rupexmlete3r" path="res://resource/slot/new_inventory_slot.tres" id="1_4lp6o"]
 
-[node name="NewSlotUI" type="SlotUI" unique_id=1643243471]
+[node name="NewSlotUI" type="SlotUI" unique_id=1643243471 node_paths=PackedStringArray("item_ui_holder")]
 slot = ExtResource("1_4lp6o")
+item_ui_holder = NodePath("PanelContainer")
 custom_minimum_size = Vector2(50, 50)
 anchors_preset = 15
 anchor_right = 1.0
