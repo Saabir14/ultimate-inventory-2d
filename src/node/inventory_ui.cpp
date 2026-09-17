@@ -47,6 +47,10 @@ void InventoryUI::set_inventory(const Ref<Inventory> &p_inventory) {
 	if (inventory == p_inventory)
 		return;
 
+	// Prevents error message at start
+	if (!inventory_holder && !is_node_ready())
+		return;
+
 	ERR_FAIL_NULL(inventory_holder);
 
 	if (inventory.is_valid())
