@@ -47,13 +47,13 @@ void InventoryUI::set_inventory(const Ref<Inventory> &p_inventory) {
 	if (inventory == p_inventory)
 		return;
 
-	if (!inventory_holder)
-		return;
+	ERR_FAIL_NULL(inventory_holder);
 
 	if (inventory.is_valid())
 		inventory->disconnect("changed", callable_mp(this, &InventoryUI::_update_ui));
 
 	inventory = p_inventory;
+	inventory_holder->set_inventory(inventory);
 
 	if (inventory.is_valid())
 		inventory->connect("changed", callable_mp(this, &InventoryUI::_update_ui));
@@ -86,10 +86,14 @@ void InventoryUI::set_inventory_holder(InventoryHolder *p_inventory_holder) {
 InventoryHolder *InventoryUI::get_inventory_holder() const { return inventory_holder; }
 
 void InventoryUI::_queue_free_slot_ui_nodes() {
+	if (slot_ui_nodes.is_empty())
+		return;
+
 	for (Variant slot_node : slot_ui_nodes) {
 		if (Node *node = Object::cast_to<Node>(slot_node))
 			node->queue_free();
 	}
+
 	slot_ui_nodes.clear();
 }
 

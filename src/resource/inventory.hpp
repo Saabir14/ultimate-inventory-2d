@@ -11,8 +11,6 @@ private:
 	Ref<InventorySlot> slot_template;
 	TypedArray<Ref<InventorySlot>> slots;
 
-	TypedArray<Ref<InventoryItem>> items;
-
 protected:
 	static void _bind_methods();
 

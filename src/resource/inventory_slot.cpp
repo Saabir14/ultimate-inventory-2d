@@ -22,7 +22,10 @@ void InventorySlot::_bind_methods() {
 	GDVIRTUAL_BIND(_can_hold_item, "item");
 }
 
-void InventorySlot::set_slot_ui_scene_path(const StringName scene_path) { slot_ui_scene_path = scene_path; }
+void InventorySlot::set_slot_ui_scene_path(const StringName scene_path) {
+    slot_ui_scene_path = scene_path;
+    emit_changed();
+}
 StringName InventorySlot::get_slot_ui_scene_path() const { return slot_ui_scene_path; }
 
 InventorySlotUI *InventorySlot::instantiate_slot_ui(PackedScene::GenEditState p_edit_state) {

@@ -11,7 +11,7 @@ using namespace godot;
 void Inventory::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("set_slot_template", "slot"), &Inventory::set_slot_template);
 	ClassDB::bind_method(D_METHOD("get_slot_template"), &Inventory::get_slot_template);
-	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "slot", PROPERTY_HINT_RESOURCE_TYPE, "InventorySlot"), "set_slot_template", "get_slot_template");
+	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "slot_template", PROPERTY_HINT_RESOURCE_TYPE, "InventorySlot"), "set_slot_template", "get_slot_template");
 
 	ClassDB::bind_method(D_METHOD("set_items", "items"), &Inventory::set_items);
 	ClassDB::bind_method(D_METHOD("get_items"), &Inventory::get_items);
@@ -25,7 +25,7 @@ void Inventory::set_slot_template(const Ref<InventorySlot> &p_slot) {
 	if (p_slot.is_null()) {
 		slot_template.unref();
 		slots.clear();
-		ERR_FAIL_MSG("Slot set to null, all items have been cleared");
+		ERR_FAIL_NULL(p_slot);
 	}
 
 	slot_template = p_slot;
@@ -36,7 +36,12 @@ void Inventory::set_slot_template(const Ref<InventorySlot> &p_slot) {
 	for (int64_t i = 0; i < slots.size(); i++) {
 		// Replace current slot with duplicate of input slot keeping the item
 		Ref<InventorySlot> new_slot = slot_template->duplicate(true);
-		new_slot->set_item(Object::cast_to<InventorySlot>(slots[i])->get_item());
+		ERR_CONTINUE(new_slot.is_null());
+
+		Ref<InventorySlot> current_slot = Object::cast_to<InventorySlot>(slots[i]);
+		ERR_CONTINUE(current_slot.is_null());
+
+		new_slot->set_item(current_slot->get_item());
 		slots[i] = new_slot;
 	}
 
@@ -45,9 +50,7 @@ void Inventory::set_slot_template(const Ref<InventorySlot> &p_slot) {
 Ref<InventorySlot> Inventory::get_slot_template() const { return slot_template; }
 
 void Inventory::set_items(const TypedArray<Ref<InventoryItem>> p_items) {
-	if (slot_template.is_null()) {
-		ERR_FAIL_MSG("slot is null, can't set items");
-	}
+	ERR_FAIL_NULL(slot_template);
 
 	const int64_t previous_size = slots.size();
 	const int64_t new_size = p_items.size();
@@ -64,8 +67,7 @@ void Inventory::set_items(const TypedArray<Ref<InventoryItem>> p_items) {
 		slots[i] = slot;
 	}
 
-	if (previous_size != new_size)
-		emit_changed();
+	emit_changed();
 }
 TypedArray<Ref<InventoryItem>> Inventory::get_items() const {
 	TypedArray<Ref<InventoryItem>> items;
@@ -79,7 +81,13 @@ TypedArray<Ref<InventoryItem>> Inventory::get_items() const {
 
 int64_t Inventory::size() { return slots.size(); }
 
-Ref<InventorySlot> Inventory::get_slot(int64_t p_index) const { return slots[p_index]; }
+Ref<InventorySlot> Inventory::get_slot(int64_t p_index) const {
+	ERR_FAIL_INDEX_V(p_index, slots.size(), Ref<InventorySlot>());
+	return slots[p_index];
+}
+void Inventory::set_slot(int64_t p_index, const Ref<InventorySlot> &p_slot) {
+	ERR_FAIL_INDEX(p_index, slots.size());
+	slots[p_index] = p_slot;
+}
 
-void Inventory::set_slot(int64_t p_index, const Ref<InventorySlot> &p_slot) { slots[p_index] = p_slot; }
 Ref<InventoryItem> Inventory::get_item(int64_t p_index) const { return Object::cast_to<InventorySlot>(slots[p_index])->get_item(); }

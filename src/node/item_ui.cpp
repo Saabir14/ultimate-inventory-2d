@@ -2,6 +2,7 @@
 
 #include "godot_cpp/classes/engine.hpp"
 #include "godot_cpp/variant/callable_method_pointer.hpp"
+#include "godot_cpp/variant/variant.hpp"
 
 using namespace godot;
 
@@ -23,10 +24,8 @@ void InventoryItemUI::set_item(const Ref<InventoryItem> &p_item) {
 Ref<InventoryItem> InventoryItemUI::get_item() const { return item; }
 
 void InventoryItemUI::_on_item_ui_scene_path_set(const StringName &p_scene_path) {
-    Node *parent = get_parent();
-	parent->remove_child(this);
-	queue_free();
+    for (int32_t i = 0; i < get_child_count(); i++)
+        get_child(i)->queue_free();
 
-	InventoryItemUI *new_item_ui = item->instantiate_item_ui();
-	parent->add_child(new_item_ui);
+    replace_by(item->instantiate_item_ui(PackedScene::GEN_EDIT_STATE_INSTANCE));
 }

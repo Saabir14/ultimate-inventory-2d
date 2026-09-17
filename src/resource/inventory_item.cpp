@@ -37,6 +37,9 @@ void InventoryItem::set_item_ui_scene_path(const StringName scene_path) {
 StringName InventoryItem::get_item_ui_scene_path() const { return item_ui_scene_path; }
 
 InventoryItemUI *InventoryItem::instantiate_item_ui(PackedScene::GenEditState p_edit_state) {
+	if (item_ui_scene_path.is_empty())
+		return instantiate_default_item_ui(p_edit_state);
+
 	const StringName path = ResourceUID::ensure_path(item_ui_scene_path);
 	ERR_FAIL_COND_V_MSG(!ResourceLoader::get_singleton()->exists(path), instantiate_default_item_ui(p_edit_state), "No file found at " + path);
 
