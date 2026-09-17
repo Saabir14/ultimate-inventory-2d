@@ -9,14 +9,14 @@ namespace godot {
 
 // SlotNode holds a slot
 // handles instantiating the UI scene of the slot
-class InventorySlotUI : public MarginContainer {
-	GDCLASS(InventorySlotUI, MarginContainer)
+class SlotUI : public MarginContainer {
+	GDCLASS(SlotUI, MarginContainer)
 
 private:
 	Ref<InventorySlot> slot;
 	Node *item_ui_holder = nullptr;
 
-	InventoryItemUI *item_ui = nullptr;
+	ItemUI *item_ui = nullptr;
 
 	void _update_ui();
 

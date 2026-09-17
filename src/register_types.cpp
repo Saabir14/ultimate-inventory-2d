@@ -28,8 +28,8 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level) {
 	GDREGISTER_CLASS(Inventory)
 
 	// Nodes
-	GDREGISTER_CLASS(InventorySlotUI)
-	GDREGISTER_CLASS(InventoryItemUI)
+	GDREGISTER_CLASS(SlotUI)
+	GDREGISTER_CLASS(ItemUI)
 	GDREGISTER_CLASS(InventoryUI)
 	GDREGISTER_CLASS(InventoryHolder)
 }

@@ -28,7 +28,7 @@ void InventorySlot::set_slot_ui_scene_path(const StringName scene_path) {
 }
 StringName InventorySlot::get_slot_ui_scene_path() const { return slot_ui_scene_path; }
 
-InventorySlotUI *InventorySlot::instantiate_slot_ui(PackedScene::GenEditState p_edit_state) {
+SlotUI *InventorySlot::instantiate_slot_ui(PackedScene::GenEditState p_edit_state) {
 	const StringName path = ResourceUID::ensure_path(slot_ui_scene_path);
 	ERR_FAIL_COND_V_MSG(!ResourceLoader::get_singleton()->exists(path), nullptr, "No file found at " + path);
 
@@ -38,7 +38,7 @@ InventorySlotUI *InventorySlot::instantiate_slot_ui(PackedScene::GenEditState p_
 	Node *node = scene->instantiate(p_edit_state);
 
 	// node has to be SlotNode
-	InventorySlotUI *slot_node = Object::cast_to<InventorySlotUI>(node);
+	SlotUI *slot_node = Object::cast_to<SlotUI>(node);
 	ERR_FAIL_COND_V_MSG(!slot_node, nullptr, "No SlotUI as root node for PackedScene at " + path);
 
 	slot_node->set_slot(this);

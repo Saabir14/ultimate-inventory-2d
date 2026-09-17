@@ -36,7 +36,7 @@ void InventoryItem::set_item_ui_scene_path(const StringName scene_path) {
 }
 StringName InventoryItem::get_item_ui_scene_path() const { return item_ui_scene_path; }
 
-InventoryItemUI *InventoryItem::instantiate_item_ui(PackedScene::GenEditState p_edit_state) {
+ItemUI *InventoryItem::instantiate_item_ui(PackedScene::GenEditState p_edit_state) {
 	if (item_ui_scene_path.is_empty())
 		return instantiate_default_item_ui(p_edit_state);
 
@@ -49,14 +49,14 @@ InventoryItemUI *InventoryItem::instantiate_item_ui(PackedScene::GenEditState p_
 	Node *node = scene->instantiate(p_edit_state);
 
 	// node has to be ItemUiNode
-	InventoryItemUI *item_ui_node = Object::cast_to<InventoryItemUI>(node);
+	ItemUI *item_ui_node = Object::cast_to<ItemUI>(node);
 	ERR_FAIL_NULL_V_MSG(item_ui_node, instantiate_default_item_ui(p_edit_state), "No ItemUI as root node for PackedScene at " + path);
 
 	item_ui_node->set_item(this);
 	return item_ui_node;
 }
-InventoryItemUI *InventoryItem::instantiate_default_item_ui(PackedScene::GenEditState p_edit_state) {
-	InventoryItemUI *item_ui = memnew(InventoryItemUI);
+ItemUI *InventoryItem::instantiate_default_item_ui(PackedScene::GenEditState p_edit_state) {
+	ItemUI *item_ui = memnew(ItemUI);
 	TextureRect *texture2d = memnew(TextureRect);
 	texture2d->set_texture(memnew(PlaceholderTexture2D));
 	item_ui->add_child(texture2d);

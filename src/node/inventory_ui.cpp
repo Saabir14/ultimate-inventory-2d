@@ -115,7 +115,7 @@ void InventoryUI::_update_ui() {
 		if (slot.is_null())
 			continue;
 
-		InventorySlotUI *node = slot->instantiate_slot_ui(PackedScene::GEN_EDIT_STATE_INSTANCE);
+		SlotUI *node = slot->instantiate_slot_ui(PackedScene::GEN_EDIT_STATE_INSTANCE);
 		slot_ui_nodes[i] = node;
 
 		// Add slots right below (behind) this node

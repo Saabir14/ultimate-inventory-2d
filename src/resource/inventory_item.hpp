@@ -5,7 +5,7 @@
 #include <godot_cpp/core/gdvirtual.gen.inc>
 
 namespace godot {
-class InventoryItemUI;
+class ItemUI;
 
 // Resource to store item data
 // Extend to add properties
@@ -23,8 +23,8 @@ public:
 	void set_item_ui_scene_path(const StringName scene_path);
 	StringName get_item_ui_scene_path() const;
 
-	InventoryItemUI *instantiate_item_ui(PackedScene::GenEditState p_edit_state = PackedScene::GenEditState(0));
-	InventoryItemUI *instantiate_default_item_ui(PackedScene::GenEditState p_edit_state = PackedScene::GenEditState(0));
+	ItemUI *instantiate_item_ui(PackedScene::GenEditState p_edit_state = PackedScene::GenEditState(0));
+	ItemUI *instantiate_default_item_ui(PackedScene::GenEditState p_edit_state = PackedScene::GenEditState(0));
 
 	// Adds another item to this item
 	// This could be adding stack size

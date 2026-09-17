@@ -4,7 +4,7 @@
 #include "resource/inventory_item.hpp"
 
 namespace godot {
-class InventorySlotUI;
+class SlotUI;
 
 // Resource to store a single item data in a slot
 // Used to process swapping of items bitween slots and other item UI interactions
@@ -31,7 +31,7 @@ public:
 	void set_slot_ui_scene_path(const StringName scene_path);
 	StringName get_slot_ui_scene_path() const;
 
-	InventorySlotUI *instantiate_slot_ui(PackedScene::GenEditState p_edit_state = PackedScene::GEN_EDIT_STATE_DISABLED);
+	SlotUI *instantiate_slot_ui(PackedScene::GenEditState p_edit_state = PackedScene::GEN_EDIT_STATE_DISABLED);
 
 	void set_item(const Ref<InventoryItem> &p_item);
 	Ref<InventoryItem> get_item() const;

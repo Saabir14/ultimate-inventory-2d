@@ -8,8 +8,8 @@
 // Handles instantiating the UI scene of the item
 namespace godot {
 
-class InventoryItemUI : public MarginContainer {
-	GDCLASS(InventoryItemUI, MarginContainer)
+class ItemUI : public MarginContainer {
+	GDCLASS(ItemUI, MarginContainer)
 
 private:
 	Ref<InventoryItem> item;
