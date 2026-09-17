@@ -44,18 +44,20 @@ Ref<InventoryItem> SlotUI::get_item() const {
 }
 
 void SlotUI::set_item_ui_holder(Node *p_holder) {
+	if (!p_holder)
+		item_ui_holder = this;
+
 	item_ui_holder = p_holder;
 	_update_ui();
 }
 Node *SlotUI::get_item_ui_holder() const { return item_ui_holder; }
 
 void SlotUI::_update_ui() {
-	if (item_ui_holder == nullptr)
-		return;
+	Node *holder = item_ui_holder ? item_ui_holder : this;
 
 	// Free item ui
 	if (item_ui) {
-		item_ui_holder->remove_child(item_ui);
+		holder->remove_child(item_ui);
 		item_ui->queue_free();
 		item_ui = nullptr;
 	}
@@ -73,7 +75,7 @@ void SlotUI::_update_ui() {
 		return;
 
 	// Add item ui as child of item ui holder
-	item_ui_holder->add_child(item_ui, false);
+	holder->add_child(item_ui, false);
 }
 
 Variant SlotUI::_get_drag_data(const Vector2 &p_position) {
