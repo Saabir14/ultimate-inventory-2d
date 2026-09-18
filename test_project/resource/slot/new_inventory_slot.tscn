@@ -12,7 +12,5 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1771070047]
-custom_minimum_size = Vector2(50, 50)
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=342640863]
 layout_mode = 2
-mouse_filter = 1

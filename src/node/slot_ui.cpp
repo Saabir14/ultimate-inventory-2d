@@ -21,6 +21,9 @@ void SlotUI::_bind_methods() {
 }
 
 void SlotUI::set_slot(Ref<InventorySlot> p_slot) {
+	if (slot == p_slot)
+		return;
+
 	if (slot.is_valid())
 		slot->disconnect("changed", callable_mp(this, &SlotUI::_update_ui));
 
@@ -34,7 +37,14 @@ void SlotUI::set_slot(Ref<InventorySlot> p_slot) {
 Ref<InventorySlot> SlotUI::get_slot() const { return slot; }
 
 void SlotUI::set_item(Ref<InventoryItem> p_item) {
-	ERR_FAIL_COND_MSG(slot.is_null(), "Can't set item of null slot");
+	if (slot.is_null() && !is_node_ready())
+		return;
+
+	ERR_FAIL_NULL(slot);
+
+	if (slot->get_item() == p_item)
+		return;
+
 	slot->set_item(p_item);
 }
 Ref<InventoryItem> SlotUI::get_item() const {
@@ -47,9 +57,6 @@ void SlotUI::set_item_ui_holder(Node *p_holder) {
 	if (item_ui_holder == p_holder)
 		return;
 
-	if (item_ui_holder)
-		item_ui_holder->remove_child(item_ui);
-
 	item_ui_holder = p_holder ? p_holder : this;
 	_update_ui();
 }
@@ -58,13 +65,11 @@ Node *SlotUI::get_item_ui_holder() const { return item_ui_holder; }
 void SlotUI::_update_ui() {
 	// Free item ui
 	if (item_ui) {
-	    item_ui_holder->remove_child(item_ui);
 		item_ui->queue_free();
 		item_ui = nullptr;
 	}
 
-	if (slot.is_null())
-		return;
+	ERR_FAIL_NULL(slot);
 
 	const Ref<InventoryItem> item = slot->get_item();
 	if (item.is_null())
@@ -72,11 +77,10 @@ void SlotUI::_update_ui() {
 
 	// Instantiate item ui scene
 	item_ui = item->instantiate_item_ui(PackedScene::GEN_EDIT_STATE_INSTANCE);
-	if (item_ui == nullptr)
-		return;
+	ERR_FAIL_NULL(item_ui);
 
 	// Add item ui as child of item ui holder
-	item_ui_holder->add_child(item_ui, false);
+	item_ui_holder->call_deferred("add_child", item_ui);
 }
 
 Variant SlotUI::_get_drag_data(const Vector2 &p_position) {
