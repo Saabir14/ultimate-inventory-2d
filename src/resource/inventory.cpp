@@ -22,16 +22,8 @@ void Inventory::set_slot_template(const Ref<InventorySlot> &p_slot) {
 	if (slot_template == p_slot)
 		return;
 
-	if (p_slot.is_null()) {
-		slot_template.unref();
-		slots.clear();
-		ERR_FAIL_NULL(p_slot);
-	}
-
 	slot_template = p_slot;
-
-	if (slot_template.is_null())
-		return;
+	ERR_FAIL_NULL(p_slot);
 
 	for (int64_t i = 0; i < slots.size(); i++) {
 		// Replace current slot with duplicate of input slot keeping the item
@@ -81,13 +73,28 @@ TypedArray<Ref<InventoryItem>> Inventory::get_items() const {
 
 int64_t Inventory::size() { return slots.size(); }
 
-Ref<InventorySlot> Inventory::get_slot(int64_t p_index) const {
-	ERR_FAIL_INDEX_V(p_index, slots.size(), Ref<InventorySlot>());
-	return slots[p_index];
-}
 void Inventory::set_slot(int64_t p_index, const Ref<InventorySlot> &p_slot) {
 	ERR_FAIL_INDEX(p_index, slots.size());
 	slots[p_index] = p_slot;
 }
+Ref<InventorySlot> Inventory::get_slot(int64_t p_index) const {
+	ERR_FAIL_INDEX_V(p_index, slots.size(), Ref<InventorySlot>());
+	return slots[p_index];
+}
 
-Ref<InventoryItem> Inventory::get_item(int64_t p_index) const { return Object::cast_to<InventorySlot>(slots[p_index])->get_item(); }
+void Inventory::set_item(int64_t p_index, const Ref<InventoryItem> &p_item) {
+	ERR_FAIL_INDEX(p_index, slots.size());
+
+	Ref<InventorySlot> slot = slots[p_index];
+	ERR_FAIL_NULL(slot);
+
+	slot->set_item(p_item);
+}
+Ref<InventoryItem> Inventory::get_item(int64_t p_index) const {
+	ERR_FAIL_INDEX_V(p_index, slots.size(), nullptr);
+
+	Ref<InventorySlot> slot = slots[p_index];
+	ERR_FAIL_NULL_V(slot, nullptr);
+
+	return slot->get_item();
+}

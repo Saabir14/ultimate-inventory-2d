@@ -2,9 +2,11 @@
 #include "godot_cpp/classes/node.hpp"
 #include "godot_cpp/classes/object.hpp"
 #include "godot_cpp/classes/packed_scene.hpp"
+#include "godot_cpp/classes/ref.hpp"
 #include "godot_cpp/core/class_db.hpp"
 #include "godot_cpp/core/error_macros.hpp"
 #include "node/slot_ui.hpp"
+#include "resource/inventory.hpp"
 
 using namespace godot;
 
@@ -12,10 +14,6 @@ void InventoryUI::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("set_inventory_holder", "inventory_holder"), &InventoryUI::set_inventory_holder);
 	ClassDB::bind_method(D_METHOD("get_inventory_holder"), &InventoryUI::get_inventory_holder);
 	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "inventory_holder", PROPERTY_HINT_NODE_TYPE, "InventoryHolder"), "set_inventory_holder", "get_inventory_holder");
-
-	ClassDB::bind_method(D_METHOD("set_inventory", "inventory"), &InventoryUI::set_inventory);
-	ClassDB::bind_method(D_METHOD("get_inventory"), &InventoryUI::get_inventory);
-	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "inventory", PROPERTY_HINT_RESOURCE_TYPE, "Inventory"), "set_inventory", "get_inventory");
 }
 
 InventoryUI::InventoryUI() {
@@ -29,63 +27,33 @@ void InventoryUI::_notification(int p_what) {
 			break;
 
 		case NOTIFICATION_PARENTED:
-			_update_ui();
+			_instantiate_slot_ui_nodes();
 			index = get_index();
 			break;
 
 		case NOTIFICATION_INTERNAL_PROCESS:
 			const int32_t new_index = get_index();
-			if (new_index != index) {
-				index = new_index;
-				_update_ui();
-			}
+			if (new_index == index)
+				break;
+			index = new_index;
+			_update_ui();
 			break;
 	}
 }
-
-void InventoryUI::set_inventory(const Ref<Inventory> &p_inventory) {
-	if (inventory == p_inventory)
-		return;
-
-	// Prevents error message at start
-	if (!inventory_holder && !is_node_ready())
-		return;
-
-	ERR_FAIL_NULL(inventory_holder);
-
-	if (inventory.is_valid())
-		inventory->disconnect("changed", callable_mp(this, &InventoryUI::_update_ui));
-
-	inventory = p_inventory;
-	inventory_holder->set_inventory(inventory);
-
-	if (inventory.is_valid())
-		inventory->connect("changed", callable_mp(this, &InventoryUI::_update_ui));
-
-	_update_ui();
-}
-Ref<Inventory> InventoryUI::get_inventory() const { return inventory; }
 
 void InventoryUI::set_inventory_holder(InventoryHolder *p_inventory_holder) {
 	if (inventory_holder == p_inventory_holder)
 		return;
 
 	if (inventory_holder)
-		inventory_holder->disconnect("inventory_set", callable_mp(this, &InventoryUI::set_inventory));
+		inventory_holder->disconnect("inventory_set", callable_mp(this, &InventoryUI::_update_ui));
 
 	inventory_holder = p_inventory_holder;
 
-	if (!inventory_holder) {
-		if (inventory.is_valid()) {
-			inventory->disconnect("changed", callable_mp(this, &InventoryUI::_update_ui));
-			inventory.unref();
-		}
-		_queue_free_slot_ui_nodes();
-		return;
-	}
+	if (inventory_holder)
+		inventory_holder->connect("inventory_set", callable_mp(this, &InventoryUI::_update_ui));
 
-	set_inventory(p_inventory_holder->get_inventory());
-	inventory_holder->connect("inventory_set", callable_mp(this, &InventoryUI::set_inventory));
+	_update_ui();
 }
 InventoryHolder *InventoryUI::get_inventory_holder() const { return inventory_holder; }
 
@@ -101,11 +69,15 @@ void InventoryUI::_queue_free_slot_ui_nodes() {
 	slot_ui_nodes.clear();
 }
 
-void InventoryUI::_update_ui() {
-	_queue_free_slot_ui_nodes();
-
+void InventoryUI::_instantiate_slot_ui_nodes() {
 	Node *parent = get_parent();
-	if (inventory.is_null() || !parent)
+	ERR_FAIL_NULL(parent);
+
+	if (!inventory_holder)
+		return;
+
+	Ref<Inventory> inventory = inventory_holder->get_inventory();
+	if (inventory.is_null())
 		return;
 
 	slot_ui_nodes.resize(inventory->size());
@@ -120,8 +92,13 @@ void InventoryUI::_update_ui() {
 
 		// Add slots right below (behind) this node
 		if (node) {
-			parent->add_child(node, false, INTERNAL_MODE_DISABLED);
+			parent->add_child(node);
 			parent->move_child(node, get_index() + 1);
 		}
 	}
+}
+
+void InventoryUI::_update_ui() {
+	_queue_free_slot_ui_nodes();
+	_instantiate_slot_ui_nodes();
 }

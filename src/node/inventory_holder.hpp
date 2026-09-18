@@ -13,6 +13,8 @@ private:
 
 	Ref<Inventory> inventory;
 
+	void _emit_inventory_set();
+
 protected:
 	static void _bind_methods();
 	void _notification(int p_what);

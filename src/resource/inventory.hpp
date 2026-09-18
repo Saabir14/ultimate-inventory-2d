@@ -23,9 +23,10 @@ public:
 
 	int64_t size();
 
+	void set_slot(int64_t p_index, const Ref<InventorySlot> &p_slot);
 	Ref<InventorySlot> get_slot(int64_t p_index) const;
 
-	void set_slot(int64_t p_index, const Ref<InventorySlot> &p_slot);
+	void set_item(int64_t p_index, const Ref<InventoryItem> &p_item);
 	Ref<InventoryItem> get_item(int64_t p_index) const;
 };
 } //namespace godot

@@ -3,6 +3,7 @@
 #include "godot_cpp/classes/ref.hpp"
 #include "godot_cpp/core/object.hpp"
 #include "godot_cpp/core/property_info.hpp"
+#include "godot_cpp/variant/callable_method_pointer.hpp"
 #include "godot_cpp/variant/variant.hpp"
 #include "resource/inventory.hpp"
 
@@ -21,7 +22,7 @@ void InventoryHolder::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("set_inventory", "inventory"), &InventoryHolder::set_inventory);
 	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "inventory", PROPERTY_HINT_RESOURCE_TYPE, "Inventory"), "set_inventory", "get_inventory");
 
-	ADD_SIGNAL(MethodInfo("inventory_set", PropertyInfo(Variant::OBJECT, "inventory", PROPERTY_HINT_RESOURCE_TYPE, "Inventory")));
+	ADD_SIGNAL(MethodInfo("inventory_set"));
 }
 
 void InventoryHolder::set_attached_node(Node *p_node) {
@@ -51,7 +52,18 @@ void InventoryHolder::_notification(int p_what) {
 }
 
 void InventoryHolder::set_inventory(const Ref<Inventory> &p_inventory) {
+	if (inventory.is_valid())
+		inventory->disconnect("changed", callable_mp(this, &InventoryHolder::_emit_inventory_set));
+
 	inventory = p_inventory;
-	emit_signal("inventory_set", inventory);
+
+	if (inventory.is_valid())
+		inventory->connect("changed", callable_mp(this, &InventoryHolder::_emit_inventory_set));
+
+	_emit_inventory_set();
 }
 Ref<Inventory> InventoryHolder::get_inventory() const { return inventory; }
+
+void InventoryHolder::_emit_inventory_set() {
+	emit_signal("inventory_set");
+}

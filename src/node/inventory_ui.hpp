@@ -11,16 +11,17 @@ class InventoryUI : public Node {
 	GDCLASS(InventoryUI, Node);
 
 private:
-    // InventoryHolder reference to get the inventory
+	// InventoryHolder reference to get the inventory
 	InventoryHolder *inventory_holder = nullptr;
-	// Inventory reference
-   	Ref<Inventory> inventory;
 
 	// Keep track of all the nodes instantiated by the inventory UI
 	TypedArray<Node> slot_ui_nodes;
 
 	// Queue free all slot UI nodes and remove from the slot_ui_nodes array
 	void _queue_free_slot_ui_nodes();
+
+	// Instantiate slot UI nodes and add to the slot_ui_nodes array
+	void _instantiate_slot_ui_nodes();
 
 	// Update the UI when Inventory changes
 	void _update_ui();
@@ -35,9 +36,6 @@ protected:
 
 public:
 	InventoryUI();
-
-	void set_inventory(const Ref<Inventory> &p_inventory);
-	Ref<Inventory> get_inventory() const;
 
 	void set_inventory_holder(InventoryHolder *p_inventory_holder);
 	InventoryHolder *get_inventory_holder() const;

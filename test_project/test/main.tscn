@@ -70,4 +70,3 @@ alignment = 1
 
 [node name="InventoryUI" type="InventoryUI" parent="Player/CanvasLayer/HBoxContainer" unique_id=1720791450 node_paths=PackedStringArray("inventory_holder")]
 inventory_holder = NodePath("../../../InventoryHolder")
-inventory = ExtResource("2_ik7bt")
