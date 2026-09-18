@@ -24,8 +24,14 @@ void ItemUI::set_item(const Ref<InventoryItem> &p_item) {
 Ref<InventoryItem> ItemUI::get_item() const { return item; }
 
 void ItemUI::_on_item_ui_scene_path_set(const StringName &p_scene_path) {
-    for (int32_t i = 0; i < get_child_count(); i++)
-        get_child(i)->queue_free();
+	Node *parent = get_parent();
+	if (!parent)
+		return;
 
-    replace_by(item->instantiate_item_ui(PackedScene::GEN_EDIT_STATE_INSTANCE));
+	int32_t index = get_index();
+	queue_free();
+
+	Node *new_node = item->instantiate_item_ui(PackedScene::GEN_EDIT_STATE_INSTANCE);
+	parent->call_deferred("add_child", new_node);
+	parent->call_deferred("move_child", new_node, index);
 }
