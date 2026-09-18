@@ -1,4 +1,5 @@
 #include "inventory_ui.hpp"
+
 #include "godot_cpp/classes/node.hpp"
 #include "godot_cpp/classes/object.hpp"
 #include "godot_cpp/classes/packed_scene.hpp"
@@ -53,9 +54,19 @@ void InventoryUI::set_inventory_holder(InventoryHolder *p_inventory_holder) {
 	if (inventory_holder)
 		inventory_holder->connect("inventory_set", callable_mp(this, &InventoryUI::_update_ui));
 
+	update_configuration_warnings();
 	_update_ui();
 }
 InventoryHolder *InventoryUI::get_inventory_holder() const { return inventory_holder; }
+
+PackedStringArray InventoryUI::_get_configuration_warnings() const {
+	PackedStringArray warnings;
+
+	if (!inventory_holder)
+		warnings.push_back("An InventoryHolder node must be provided for InventoryUI to function. Please assign an InventoryHolder to it!");
+
+	return warnings;
+}
 
 void InventoryUI::_queue_free_slot_ui_nodes() {
 	if (slot_ui_nodes.is_empty())

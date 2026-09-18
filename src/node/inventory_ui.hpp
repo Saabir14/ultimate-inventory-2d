@@ -1,10 +1,10 @@
 #pragma once
 
-#include "godot_cpp/variant/typed_array.hpp"
+#include "godot_cpp/variant/packed_string_array.hpp"
 #include "node/inventory_holder.hpp"
-#include "resource/inventory.hpp"
 
 #include "godot_cpp/classes/node.hpp"
+#include "godot_cpp/variant/typed_array.hpp"
 
 namespace godot {
 class InventoryUI : public Node {
@@ -35,6 +35,8 @@ protected:
 	void _notification(int p_what);
 
 public:
+	PackedStringArray _get_configuration_warnings() const override;
+
 	InventoryUI();
 
 	void set_inventory_holder(InventoryHolder *p_inventory_holder);
