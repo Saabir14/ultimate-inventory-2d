@@ -28,25 +28,26 @@ void InventoryHolder::set_attached_node(Node *p_node) {
 	if (attached_node == p_node)
 		return;
 
+	ERR_FAIL_COND_MSG(use_parent_as_attached_node, "Cannot set attached node when use_parent_as_attached_node is enabled");
+
 	attached_node = p_node;
-	use_parent_as_attached_node = get_parent() == attached_node;
 }
 Node *InventoryHolder::get_attached_node() const { return attached_node; }
 
 void InventoryHolder::set_use_parent_as_attached_node(bool p_use_parent) {
-    use_parent_as_attached_node = p_use_parent;
-    if (p_use_parent)
-        attached_node = get_parent();
+	use_parent_as_attached_node = p_use_parent;
+	if (use_parent_as_attached_node)
+		attached_node = get_parent();
 }
 bool InventoryHolder::get_use_parent_as_attached_node() const { return use_parent_as_attached_node; }
 
 void InventoryHolder::_notification(int p_what) {
-    switch (p_what) {
-        case NOTIFICATION_PARENTED:
-            if (use_parent_as_attached_node)
-                attached_node = get_parent();
-            break;
-    }
+	switch (p_what) {
+		case NOTIFICATION_PARENTED:
+			if (use_parent_as_attached_node)
+				attached_node = get_parent();
+			break;
+	}
 }
 
 void InventoryHolder::set_inventory(const Ref<Inventory> &p_inventory) {
