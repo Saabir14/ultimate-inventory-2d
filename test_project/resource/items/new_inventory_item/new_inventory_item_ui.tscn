@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://c7k8ab1pldb28"]
 
+[ext_resource type="InventoryItem" uid="uid://dfcqko0i0x86c" path="res://resource/items/new_inventory_item/new_inventory_item.tres" id="1_g5kdm"]
 [ext_resource type="Texture2D" uid="uid://bioamopp6syek" path="res://icon.svg" id="2_vr5hw"]
 
 [node name="NewItemUi" type="ItemUI" unique_id=508103548]
+item = ExtResource("1_g5kdm")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

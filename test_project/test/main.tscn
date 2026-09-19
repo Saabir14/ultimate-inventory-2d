@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://nu0lvg7u16vs"]
 
+[ext_resource type="Inventory" uid="uid://bu4e73xj2hr1l" path="res://resource/inventory/new_inventory.tres" id="1_yfdjg"]
+
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_dlslu"]
 
 [sub_resource type="GDScript" id="GDScript_dlslu"]
@@ -62,4 +64,9 @@ grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
 
-[node name="InventoryUI" type="InventoryUI" parent="Player/CanvasLayer/HBoxContainer" unique_id=1720791450]
+[node name="InventoryUI" type="InventoryUI" parent="Player/CanvasLayer/HBoxContainer" unique_id=1720791450 node_paths=PackedStringArray("inventory_holder")]
+inventory_holder = NodePath("../../../InventoryHolder")
+
+[node name="InventoryHolder" type="InventoryHolder" parent="Player" unique_id=1187048439 node_paths=PackedStringArray("attached_node")]
+attached_node = NodePath("..")
+inventory = ExtResource("1_yfdjg")
