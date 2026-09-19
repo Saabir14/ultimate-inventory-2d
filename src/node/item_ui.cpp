@@ -39,7 +39,7 @@ void ItemUI::_on_item_ui_scene_path_set(const StringName &p_scene_path) {
 	int32_t index = get_index();
 	queue_free();
 
-	Node *new_node = item->instantiate_item_ui(PackedScene::GEN_EDIT_STATE_INSTANCE);
+	Node *new_node = item->instantiate_item_ui();
 
 	parent->call_deferred("add_child", new_node);
 	parent->call_deferred("move_child", new_node, index);

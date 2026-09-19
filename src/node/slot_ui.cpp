@@ -76,7 +76,7 @@ void SlotUI::_update_ui() {
 		return;
 
 	// Instantiate item ui scene
-	item_ui = item->instantiate_item_ui(PackedScene::GEN_EDIT_STATE_INSTANCE);
+	item_ui = item->instantiate_item_ui();
 	ERR_FAIL_NULL(item_ui);
 
 	// Add item ui as child of item ui holder
