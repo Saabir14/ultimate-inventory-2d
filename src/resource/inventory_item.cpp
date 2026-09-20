@@ -62,7 +62,11 @@ ItemUI *InventoryItem::instantiate_default_item_ui(PackedScene::GenEditState p_e
 	return item_ui;
 }
 
-bool InventoryItem::place(const Ref<InventoryItem> item) { return false; }
+bool InventoryItem::place(const Ref<InventoryItem> item) {
+    bool result = false;
+	GDVIRTUAL_CALL(place, item, result);
+	return result;
+}
 
 Ref<InventoryItem> InventoryItem::take(int n) {
 	Ref<InventoryItem> result = nullptr;
