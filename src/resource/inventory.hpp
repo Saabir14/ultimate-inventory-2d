@@ -21,7 +21,7 @@ public:
 	void set_items(const TypedArray<Ref<InventoryItem>>);
 	TypedArray<Ref<InventoryItem>> get_items() const;
 
-	int64_t size();
+	int64_t size() const;
 
 	void set_slot(int64_t p_index, const Ref<InventorySlot> &p_slot);
 	Ref<InventorySlot> get_slot(int64_t p_index) const;

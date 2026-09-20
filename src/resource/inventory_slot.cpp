@@ -53,7 +53,11 @@ void InventorySlot::set_item(const Ref<InventoryItem> &p_item) {
 }
 Ref<InventoryItem> InventorySlot::get_item() const { return item; }
 
-bool InventorySlot::_can_hold_item(const Ref<InventoryItem> &p_item) { return true; }
+bool InventorySlot::_can_hold_item(const Ref<InventoryItem> &p_item) {
+	bool result = false;
+	GDVIRTUAL_CALL(_can_hold_item, p_item, result);
+	return result;
+}
 
 bool InventorySlot::place_item(const Ref<InventoryItem> &p_item) {
 	if (!_can_hold_item(p_item))

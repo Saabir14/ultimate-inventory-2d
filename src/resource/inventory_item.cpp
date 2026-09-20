@@ -1,4 +1,5 @@
 #include "inventory_item.hpp"
+#include "godot_cpp/classes/wrapped.hpp"
 #include "node/item_ui.hpp"
 
 #include "godot_cpp/classes/global_constants.hpp"
@@ -63,7 +64,23 @@ ItemUI *InventoryItem::instantiate_default_item_ui(PackedScene::GenEditState p_e
 
 bool InventoryItem::place(const Ref<InventoryItem> item) { return false; }
 
-Ref<InventoryItem> InventoryItem::take(int n) { return nullptr; }
-Ref<InventoryItem> InventoryItem::take_half() { return nullptr; }
-Ref<InventoryItem> InventoryItem::take_one() { return nullptr; }
-Ref<InventoryItem> InventoryItem::take_all() { return nullptr; }
+Ref<InventoryItem> InventoryItem::take(int n) {
+	Ref<InventoryItem> result = nullptr;
+	GDVIRTUAL_CALL(take, n, result);
+	return result;
+}
+Ref<InventoryItem> InventoryItem::take_half() {
+	Ref<InventoryItem> result = nullptr;
+	GDVIRTUAL_CALL(take_half, result);
+	return result;
+}
+Ref<InventoryItem> InventoryItem::take_one() {
+	Ref<InventoryItem> result = nullptr;
+	GDVIRTUAL_CALL(take_one, result);
+	return result;
+}
+Ref<InventoryItem> InventoryItem::take_all() {
+	Ref<InventoryItem> result = nullptr;
+	GDVIRTUAL_CALL(take_all, result);
+	return result;
+}
