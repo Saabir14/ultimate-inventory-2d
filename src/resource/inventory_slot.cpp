@@ -89,6 +89,9 @@ bool InventorySlot::place_item_from_slot(const Ref<InventorySlot> &p_slot) {
 		return swap_item_from_slot(p_slot);
 
 	// Try adding item from slot inside the item
+	// For example, placing a max 10 stack item of 5 count
+	// into a slot that has 9 count results in a 10 count item
+	// in the desitination and 4 count in the source slot
 	return place_item(p_slot->item);
 }
 
