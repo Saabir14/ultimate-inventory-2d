@@ -72,9 +72,10 @@ void InventoryUI::_queue_free_slot_ui_nodes() {
 	if (slot_ui_nodes.is_empty())
 		return;
 
-	for (Variant slot_node : slot_ui_nodes) {
-		if (Node *node = Object::cast_to<Node>(slot_node))
-			node->queue_free();
+	for (int64_t i = 0; i < slot_ui_nodes.size(); i++) {
+		Node *node = Object::cast_to<Node>(slot_ui_nodes[i]);
+		ERR_CONTINUE(!node);
+		node->queue_free();
 	}
 
 	slot_ui_nodes.clear();
@@ -93,19 +94,17 @@ void InventoryUI::_instantiate_slot_ui_nodes() {
 
 	slot_ui_nodes.resize(inventory->size());
 
-	for (int64_t i = slot_ui_nodes.size() - 1; i >= 0; i--) {
+	for (int64_t i = 0; i < inventory->size(); i++) {
 		Ref<InventorySlot> slot = inventory->get_slot(i);
-		if (slot.is_null())
-			continue;
+		ERR_CONTINUE(slot.is_null());
 
-		SlotUI *node = slot->instantiate_slot_ui();
-		slot_ui_nodes[i] = node;
+		SlotUI *slot_ui = slot->instantiate_slot_ui();
+		slot_ui_nodes[i] = slot_ui;
+		ERR_CONTINUE(!slot_ui);
 
 		// Add slots right below (behind) this node
-		if (node) {
-			parent->add_child(node);
-			parent->move_child(node, get_index() + 1);
-		}
+		parent->add_child(slot_ui);
+		parent->move_child(slot_ui, get_index() + 1 + i);
 	}
 }
 

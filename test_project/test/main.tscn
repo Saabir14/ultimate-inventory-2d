@@ -52,6 +52,10 @@ script = SubResource("GDScript_dlslu")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=1901496299]
 shape = SubResource("CapsuleShape2D_dlslu")
 
+[node name="InventoryHolder" type="InventoryHolder" parent="Player" unique_id=1187048439 node_paths=PackedStringArray("attached_node")]
+attached_node = NodePath("..")
+inventory = ExtResource("1_yfdjg")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="Player" unique_id=991143294]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Player/CanvasLayer" unique_id=312601920]
@@ -64,9 +68,5 @@ grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
 
-[node name="InventoryUI" type="InventoryUI" parent="Player/CanvasLayer/HBoxContainer" unique_id=1720791450 node_paths=PackedStringArray("inventory_holder")]
+[node name="InventoryUI" type="InventoryUI" parent="Player/CanvasLayer/HBoxContainer" unique_id=843986461 node_paths=PackedStringArray("inventory_holder")]
 inventory_holder = NodePath("../../../InventoryHolder")
-
-[node name="InventoryHolder" type="InventoryHolder" parent="Player" unique_id=1187048439 node_paths=PackedStringArray("attached_node")]
-attached_node = NodePath("..")
-inventory = ExtResource("1_yfdjg")
