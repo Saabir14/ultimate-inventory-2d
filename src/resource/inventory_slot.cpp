@@ -76,6 +76,10 @@ bool InventorySlot::swap_item_from_slot(const Ref<InventorySlot> &p_slot) {
 	// Swap items
 	std::swap(item, p_slot->item);
 
+	// Emit item_changed signals as std::swap doesn't trigger this effect
+	emit_signal("item_changed");
+	p_slot->emit_signal("item_changed");
+
 	return true;
 }
 
