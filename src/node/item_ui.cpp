@@ -1,13 +1,8 @@
 #include "item_ui.hpp"
 
 #include "godot_cpp/classes/engine.hpp"
-#include "godot_cpp/classes/node.hpp"
-#include "godot_cpp/classes/object.hpp"
 #include "godot_cpp/classes/scene_tree.hpp"
-#include "godot_cpp/classes/sub_viewport.hpp"
-#include "godot_cpp/classes/window.hpp"
 #include "godot_cpp/core/error_macros.hpp"
-#include "godot_cpp/variant/callable_method_pointer.hpp"
 #include "godot_cpp/variant/variant.hpp"
 
 using namespace godot;
@@ -18,29 +13,5 @@ void ItemUI::_bind_methods() {
 	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "item", PROPERTY_HINT_RESOURCE_TYPE, "InventoryItem"), "set_item", "get_item");
 }
 
-void ItemUI::set_item(const Ref<InventoryItem> &p_item) {
-	if (item.is_valid())
-		item->disconnect("item_ui_scene_path_set", callable_mp(this, &ItemUI::_on_item_ui_scene_path_set));
-
-	item = p_item;
-
-	if (item.is_valid())
-		item->connect("item_ui_scene_path_set", callable_mp(this, &ItemUI::_on_item_ui_scene_path_set));
-}
+void ItemUI::set_item(const Ref<InventoryItem> &p_item) { item = p_item; }
 Ref<InventoryItem> ItemUI::get_item() const { return item; }
-
-void ItemUI::_on_item_ui_scene_path_set(const StringName &p_scene_path) {
-	// If this node is the top most node in the scene tree, return
-	Node *parent = get_parent();
-	// This works but wont will prevent update of ItemUI if parent is a SubViewport
-	if (Object::cast_to<SubViewport>(parent))
-		return;
-
-	int32_t index = get_index();
-	queue_free();
-
-	Node *new_node = item->instantiate_item_ui();
-
-	parent->call_deferred("add_child", new_node);
-	parent->call_deferred("move_child", new_node, index);
-}

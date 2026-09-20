@@ -16,8 +16,6 @@ void InventoryItem::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("get_item_ui_scene_path"), &InventoryItem::get_item_ui_scene_path);
 	ADD_PROPERTY(PropertyInfo(Variant::STRING, "item_ui_scene_path", PROPERTY_HINT_FILE, "*.tscn, *.scn, *.res"), "set_item_ui_scene_path", "get_item_ui_scene_path");
 
-	ADD_SIGNAL(MethodInfo("item_ui_scene_path_set", PropertyInfo(Variant::STRING_NAME, "item_ui_scene_path", PROPERTY_HINT_FILE, "*.tscn, *.scn, *.res")));
-
 	ClassDB::bind_method(D_METHOD("instantiate_item_ui"), &InventoryItem::instantiate_item_ui, DEFVAL(0));
 
 	GDVIRTUAL_BIND(place, "item");
@@ -32,7 +30,6 @@ void InventoryItem::set_item_ui_scene_path(const StringName scene_path) {
 		return;
 
 	item_ui_scene_path = scene_path;
-	emit_signal("item_ui_scene_path_set", item_ui_scene_path);
 }
 StringName InventoryItem::get_item_ui_scene_path() const { return item_ui_scene_path; }
 
