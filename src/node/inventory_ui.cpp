@@ -23,12 +23,8 @@ InventoryUI::InventoryUI() {
 
 void InventoryUI::_notification(int p_what) {
 	switch (p_what) {
-		case NOTIFICATION_UNPARENTED:
-			_queue_free_slot_ui_nodes();
-			break;
-
 		case NOTIFICATION_PARENTED:
-			_instantiate_slot_ui_nodes();
+			_update_ui();
 			index = get_index();
 			break;
 
