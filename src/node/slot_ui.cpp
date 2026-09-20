@@ -2,6 +2,7 @@
 
 #include "godot_cpp/classes/packed_scene.hpp"
 #include "godot_cpp/core/error_macros.hpp"
+#include "godot_cpp/variant/callable_method_pointer.hpp"
 #include "node/item_ui.hpp"
 
 using namespace godot;
@@ -25,12 +26,12 @@ void SlotUI::set_slot(Ref<InventorySlot> p_slot) {
 		return;
 
 	if (slot.is_valid())
-		slot->disconnect("changed", callable_mp(this, &SlotUI::_update_ui));
+		slot->disconnect("item_changed", callable_mp(this, &SlotUI::_update_ui));
 
 	slot = p_slot;
 
 	if (slot.is_valid())
-		slot->connect("changed", callable_mp(this, &SlotUI::_update_ui));
+		slot->connect("item_changed", callable_mp(this, &SlotUI::_update_ui));
 
 	_update_ui();
 }

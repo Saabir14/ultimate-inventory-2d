@@ -13,6 +13,8 @@ void InventorySlot::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("get_item"), &InventorySlot::get_item);
 	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "item", PROPERTY_HINT_RESOURCE_TYPE, "InventoryItem"), "set_item", "get_item");
 
+	ADD_SIGNAL(MethodInfo("item_changed"));
+
 	ClassDB::bind_method(D_METHOD("instantiate_slot", "edit_state"), &InventorySlot::instantiate_slot_ui, DEFVAL(0));
 
 	ClassDB::bind_method(D_METHOD("swap_item_from_slot", "slot"), &InventorySlot::swap_item_from_slot);
@@ -22,10 +24,7 @@ void InventorySlot::_bind_methods() {
 	GDVIRTUAL_BIND(_can_hold_item, "item");
 }
 
-void InventorySlot::set_slot_ui_scene_path(const StringName scene_path) {
-    slot_ui_scene_path = scene_path;
-    emit_changed();
-}
+void InventorySlot::set_slot_ui_scene_path(const StringName scene_path) { slot_ui_scene_path = scene_path; }
 StringName InventorySlot::get_slot_ui_scene_path() const { return slot_ui_scene_path; }
 
 SlotUI *InventorySlot::instantiate_slot_ui(PackedScene::GenEditState p_edit_state) {
@@ -46,8 +45,11 @@ SlotUI *InventorySlot::instantiate_slot_ui(PackedScene::GenEditState p_edit_stat
 }
 
 void InventorySlot::set_item(const Ref<InventoryItem> &p_item) {
+	if (item == p_item)
+		return;
+
 	item = p_item;
-	emit_changed();
+	emit_signal("item_changed");
 }
 Ref<InventoryItem> InventorySlot::get_item() const { return item; }
 
@@ -73,12 +75,6 @@ bool InventorySlot::swap_item_from_slot(const Ref<InventorySlot> &p_slot) {
 
 	// Swap items
 	std::swap(item, p_slot->item);
-
-	// Let slots know their items have changed
-	// Since std::swap was used, this needs
-	// to be done manually here
-	emit_changed();
-	p_slot->emit_changed();
 
 	return true;
 }
