@@ -64,9 +64,6 @@ void SlotUI::set_item_ui_holder(Node *p_holder) {
 Node *SlotUI::get_item_ui_holder() const { return item_ui_holder; }
 
 void SlotUI::_update_ui() {
-	if (!item_ui_holder)
-		return;
-
 	// Free item ui
 	int32_t index = 0;
 	if (item_ui) {
@@ -74,6 +71,9 @@ void SlotUI::_update_ui() {
 		item_ui->queue_free();
 		item_ui = nullptr;
 	}
+
+	if (!item_ui_holder)
+		return;
 
 	ERR_FAIL_NULL(slot);
 
