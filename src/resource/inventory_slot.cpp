@@ -1,5 +1,7 @@
+#include "resource/inventory_slot.hpp"
 #include "godot_cpp/classes/resource_loader.hpp"
 #include "godot_cpp/classes/resource_uid.hpp"
+#include "godot_cpp/core/memory.hpp"
 #include "node/slot_ui.hpp"
 
 using namespace godot;
@@ -29,19 +31,24 @@ StringName InventorySlot::get_slot_ui_scene_path() const { return slot_ui_scene_
 
 SlotUI *InventorySlot::instantiate_slot_ui(PackedScene::GenEditState p_edit_state) {
 	const StringName path = ResourceUID::ensure_path(slot_ui_scene_path);
-	ERR_FAIL_COND_V_MSG(!ResourceLoader::get_singleton()->exists(path), nullptr, "No file found at " + path);
+	ERR_FAIL_COND_V_MSG(!ResourceLoader::get_singleton()->exists(path), instantiate_default_slot_ui(p_edit_state), "No file found at " + path);
 
 	const Ref<PackedScene> scene = ResourceLoader::get_singleton()->load(path);
-	ERR_FAIL_COND_V_MSG(!scene.is_valid(), nullptr, "File is not PackedScene at " + path);
+	ERR_FAIL_COND_V_MSG(!scene.is_valid(), instantiate_default_slot_ui(p_edit_state), "File is not PackedScene at " + path);
 
 	Node *node = scene->instantiate(p_edit_state);
 
 	// node has to be SlotNode
 	SlotUI *slot_node = Object::cast_to<SlotUI>(node);
-	ERR_FAIL_COND_V_MSG(!slot_node, nullptr, "No SlotUI as root node for PackedScene at " + path);
+	ERR_FAIL_COND_V_MSG(!slot_node, instantiate_default_slot_ui(p_edit_state), "No SlotUI as root node for PackedScene at " + path);
 
 	slot_node->set_slot(this);
 	return slot_node;
+}
+SlotUI *InventorySlot::instantiate_default_slot_ui(PackedScene::GenEditState p_edit_state) {
+	SlotUI *slot_ui = memnew(SlotUI);
+	slot_ui->set_slot(this);
+	return slot_ui;
 }
 
 void InventorySlot::set_item(const Ref<InventoryItem> &p_item) {
@@ -54,7 +61,7 @@ void InventorySlot::set_item(const Ref<InventoryItem> &p_item) {
 Ref<InventoryItem> InventorySlot::get_item() const { return item; }
 
 bool InventorySlot::_can_hold_item(const Ref<InventoryItem> &p_item) {
-	bool result = false;
+	bool result = true;
 	GDVIRTUAL_CALL(_can_hold_item, p_item, result);
 	return result;
 }

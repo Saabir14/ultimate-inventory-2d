@@ -32,6 +32,7 @@ public:
 	StringName get_slot_ui_scene_path() const;
 
 	SlotUI *instantiate_slot_ui(PackedScene::GenEditState p_edit_state = PackedScene::GEN_EDIT_STATE_DISABLED);
+	SlotUI *instantiate_default_slot_ui(PackedScene::GenEditState p_edit_state = PackedScene::GEN_EDIT_STATE_DISABLED);
 
 	void set_item(const Ref<InventoryItem> &p_item);
 	Ref<InventoryItem> get_item() const;
