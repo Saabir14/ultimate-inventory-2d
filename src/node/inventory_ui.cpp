@@ -23,6 +23,10 @@ InventoryUI::InventoryUI() {
 
 void InventoryUI::_notification(int p_what) {
 	switch (p_what) {
+		case NOTIFICATION_EXIT_TREE:
+			_queue_free_slot_ui_nodes();
+			break;
+
 		case NOTIFICATION_PARENTED:
 			_update_ui();
 			index = get_index();
@@ -79,9 +83,8 @@ void InventoryUI::_queue_free_slot_ui_nodes() {
 
 void InventoryUI::_instantiate_slot_ui_nodes() {
 	Node *parent = get_parent();
-	ERR_FAIL_NULL(parent);
 
-	if (!inventory_holder)
+	if (!inventory_holder || !parent)
 		return;
 
 	Ref<Inventory> inventory = inventory_holder->get_inventory();
