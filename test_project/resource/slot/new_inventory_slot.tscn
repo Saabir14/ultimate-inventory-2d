@@ -14,3 +14,4 @@ grow_vertical = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=342640863]
 layout_mode = 2
+mouse_filter = 1
