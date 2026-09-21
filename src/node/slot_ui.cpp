@@ -1,6 +1,6 @@
 #include "slot_ui.hpp"
 
-#include "godot_cpp/classes/packed_scene.hpp"
+#include "godot_cpp/classes/control.hpp"
 #include "godot_cpp/core/error_macros.hpp"
 #include "godot_cpp/variant/callable_method_pointer.hpp"
 #include "node/item_ui.hpp"
@@ -18,7 +18,7 @@ void SlotUI::_bind_methods() {
 
 	ClassDB::bind_method(D_METHOD("set_item_ui_holder", "holder"), &SlotUI::set_item_ui_holder);
 	ClassDB::bind_method(D_METHOD("get_item_ui_holder"), &SlotUI::get_item_ui_holder);
-	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "item_ui_holder", PROPERTY_HINT_NODE_TYPE), "set_item_ui_holder", "get_item_ui_holder");
+	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "item_ui_holder", PROPERTY_HINT_NODE_TYPE, "Control"), "set_item_ui_holder", "get_item_ui_holder");
 }
 
 void SlotUI::set_slot(Ref<InventorySlot> p_slot) {
@@ -64,8 +64,13 @@ void SlotUI::set_item_ui_holder(Node *p_holder) {
 Node *SlotUI::get_item_ui_holder() const { return item_ui_holder; }
 
 void SlotUI::_update_ui() {
+	if (!item_ui_holder)
+		return;
+
 	// Free item ui
+	int32_t index = 0;
 	if (item_ui) {
+		index = item_ui->get_index();
 		item_ui->queue_free();
 		item_ui = nullptr;
 	}
@@ -82,10 +87,14 @@ void SlotUI::_update_ui() {
 
 	// Add item ui as child of item ui holder
 	item_ui_holder->call_deferred("add_child", item_ui);
+	item_ui_holder->call_deferred("move_child", item_ui, index);
 }
 
 Variant SlotUI::_get_drag_data(const Vector2 &p_position) {
-	if (slot.is_null() || slot->get_item().is_null())
+	if (slot.is_null())
+		return Variant();
+
+	if (slot->get_item().is_null())
 		return Variant();
 
 	set_drag_preview(_get_drag_preview());

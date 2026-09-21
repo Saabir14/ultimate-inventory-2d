@@ -1,7 +1,7 @@
 #pragma once
 
+#include "godot_cpp/classes/control.hpp"
 #include "godot_cpp/classes/margin_container.hpp"
-#include "godot_cpp/classes/node.hpp"
 #include "resource/inventory_item.hpp"
 #include "resource/inventory_slot.hpp"
 
