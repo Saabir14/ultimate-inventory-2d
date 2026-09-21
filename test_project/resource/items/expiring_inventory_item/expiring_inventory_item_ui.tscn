@@ -27,7 +27,11 @@ script/source = "extends HSlider
 @export var item_ui: ItemUI
 
 func _ready():
+	if !item_ui: return
+	
 	var item : ExpirintInventoryItem = item_ui.item
+	if !item: return;
+	
 	min_value = 0
 	max_value = item.expiration_time
 	value = item.time_left
@@ -53,7 +57,7 @@ texture = ExtResource("2_a7ewo")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="HSlider" type="HSlider" parent="." unique_id=469280756]
+[node name="HSlider" type="HSlider" parent="." unique_id=469280756 node_paths=PackedStringArray("item_ui")]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_icons/grabber_disabled = SubResource("DPITexture_fsup1")
@@ -61,3 +65,4 @@ theme_override_styles/grabber_area = SubResource("StyleBoxFlat_fsup1")
 value = 30.0
 editable = false
 script = SubResource("GDScript_fsup1")
+item_ui = NodePath("..")

@@ -5,3 +5,4 @@
 [resource]
 item_ui_scene_path = &"uid://yrd6lrgpm04i"
 script = ExtResource("1_jd823")
+expiration_time = 0.0
