@@ -27,7 +27,9 @@ script/source = "extends HSlider
 @export var item_ui: ItemUI
 
 func _ready():
-	if !item_ui: return
+	if !item_ui:
+		push_error(\"item_ui is not set\")
+		return
 	
 	var item : ExpirintInventoryItem = item_ui.item
 	if !item: return;
