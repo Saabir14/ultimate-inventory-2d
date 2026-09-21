@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://yrd6lrgpm04i"]
+
+[ext_resource type="InventoryItem" uid="uid://cmp3wgfnl8p0e" path="res://resource/items/expiring_inventory_item/expiring_inventory_item.tres" id="1_6b46p"]
+[ext_resource type="Texture2D" uid="uid://bioamopp6syek" path="res://icon.svg" id="2_a7ewo"]
+
+[sub_resource type="DPITexture" id="DPITexture_fsup1"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><circle cx=\"8\" cy=\"8\" r=\"7\" fill=\"#fefefe\" fill-opacity=\".37\"/></svg>
+"
+base_scale = 0.01
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fsup1"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 0, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 6
+
+[sub_resource type="GDScript" id="GDScript_fsup1"]
+resource_name = "slider"
+script/source = "extends HSlider
+
+@export var item_ui: ItemUI
+
+func _ready():
+	var item : ExpirintInventoryItem = item_ui.item
+	min_value = 0
+	max_value = item.expiration_time
+	value = item.time_left
+	
+	item.time_left_set_to.connect(_on_time_left_set_to)
+
+func _on_time_left_set_to(time_left : float):
+	value = time_left
+"
+
+[node name="NewItemUi" type="ItemUI" unique_id=93208879]
+item = ExtResource("1_6b46p")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1536804251]
+self_modulate = Color(1.732707e-06, 0.62083197, 0.8198162, 1)
+layout_mode = 2
+texture = ExtResource("2_a7ewo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HSlider" type="HSlider" parent="." unique_id=469280756]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_icons/grabber_disabled = SubResource("DPITexture_fsup1")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_fsup1")
+value = 30.0
+editable = false
+script = SubResource("GDScript_fsup1")

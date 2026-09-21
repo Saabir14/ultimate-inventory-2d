@@ -1,8 +1,0 @@
-[gd_resource type="InventoryItem" script_class="RotatingInventoryItem" format=3 uid="uid://cmp3wgfnl8p0e"]
-
-[ext_resource type="Script" uid="uid://by3oar71porlm" path="res://resource/items/rotating_inventory_item/rotating_inventory_item.gd" id="1_ao4c8"]
-
-[resource]
-item_ui_scene_path = &"uid://yrd6lrgpm04i"
-script = ExtResource("1_ao4c8")
-metadata/_custom_type_script = "uid://by3oar71porlm"

@@ -58,15 +58,14 @@ inventory = ExtResource("1_yfdjg")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Player" unique_id=991143294]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Player/CanvasLayer" unique_id=312601920]
-anchors_preset = 12
+[node name="HBoxContainer" type="HBoxContainer" parent="Player/CanvasLayer" unique_id=621667454]
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_top = -50.0
 grow_horizontal = 2
 grow_vertical = 0
-alignment = 1
 
-[node name="InventoryUI" type="InventoryUI" parent="Player/CanvasLayer/HBoxContainer" unique_id=843986461 node_paths=PackedStringArray("inventory_holder")]
+[node name="InventoryUI" type="InventoryUI" parent="Player/CanvasLayer/HBoxContainer" unique_id=1367678626 node_paths=PackedStringArray("inventory_holder")]
 inventory_holder = NodePath("../../../InventoryHolder")

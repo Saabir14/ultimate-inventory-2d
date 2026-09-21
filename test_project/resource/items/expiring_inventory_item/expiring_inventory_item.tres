@@ -1,0 +1,7 @@
+[gd_resource type="InventoryItem" script_class="ExpirintInventoryItem" format=3 uid="uid://cmp3wgfnl8p0e"]
+
+[ext_resource type="Script" uid="uid://by3oar71porlm" path="res://resource/items/expiring_inventory_item/expiring_inventory_item.gd" id="1_jd823"]
+
+[resource]
+item_ui_scene_path = &"uid://yrd6lrgpm04i"
+script = ExtResource("1_jd823")

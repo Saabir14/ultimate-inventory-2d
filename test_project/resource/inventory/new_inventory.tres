@@ -2,9 +2,10 @@
 
 [ext_resource type="InventoryItem" uid="uid://dfcqko0i0x86c" path="res://resource/items/new_inventory_item/new_inventory_item.tres" id="1_qj0c7"]
 [ext_resource type="InventoryItem" uid="uid://dtv8b870chmug" path="res://resource/items/other_inventory_item/other_inventory_item.tres" id="2_4cnl4"]
+[ext_resource type="InventoryItem" uid="uid://cmp3wgfnl8p0e" path="res://resource/items/expiring_inventory_item/expiring_inventory_item.tres" id="3_4cnl4"]
 [ext_resource type="InventorySlot" uid="uid://rupexmlete3r" path="res://resource/slot/new_inventory_slot.tres" id="3_yg7cl"]
 
 [resource]
 slot_template = ExtResource("3_yg7cl")
-items = Array[InventoryItem]([ExtResource("2_4cnl4"), ExtResource("1_qj0c7"), null, null, null])
+items = Array[InventoryItem]([ExtResource("2_4cnl4"), ExtResource("1_qj0c7"), ExtResource("3_4cnl4"), null, null])
 resource_local_to_scene = true
