@@ -15,6 +15,8 @@ void InventoryUI::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("set_inventory_holder", "inventory_holder"), &InventoryUI::set_inventory_holder);
 	ClassDB::bind_method(D_METHOD("get_inventory_holder"), &InventoryUI::get_inventory_holder);
 	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "inventory_holder", PROPERTY_HINT_NODE_TYPE, "InventoryHolder"), "set_inventory_holder", "get_inventory_holder");
+
+	ClassDB::bind_method(D_METHOD("_update_ui"), &InventoryUI::_update_ui);
 }
 
 InventoryUI::InventoryUI() {
@@ -25,6 +27,10 @@ void InventoryUI::_notification(int p_what) {
 	switch (p_what) {
 		case NOTIFICATION_EXIT_TREE:
 			_queue_free_slot_ui_nodes();
+			break;
+
+		case NOTIFICATION_ENTER_TREE:
+			call_deferred("_update_ui");
 			break;
 
 		case NOTIFICATION_PARENTED:
