@@ -1,5 +1,6 @@
 #include "inventory.hpp"
 #include "godot_cpp/classes/ref.hpp"
+#include "godot_cpp/classes/wrapped.hpp"
 #include "godot_cpp/variant/typed_array.hpp"
 #include "resource/inventory_item.hpp"
 #include "resource/inventory_slot.hpp"
@@ -19,6 +20,8 @@ void Inventory::_bind_methods() {
 
 	ClassDB::bind_method(D_METHOD("set_item", "index", "item"), &Inventory::set_item);
 	ClassDB::bind_method(D_METHOD("get_item", "index"), &Inventory::get_item);
+
+	GDVIRTUAL_BIND(inventory_process, "delta");
 }
 
 void Inventory::set_slot_template(const Ref<InventorySlot> &p_slot) {
@@ -101,4 +104,8 @@ Ref<InventoryItem> Inventory::get_item(int64_t p_index) const {
 	ERR_FAIL_NULL_V(slot, nullptr);
 
 	return slot->get_item();
+}
+
+void Inventory::inventory_process(double delta) {
+    GDVIRTUAL_CALL(inventory_process, delta);
 }
