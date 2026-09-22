@@ -29,7 +29,7 @@ public:
 	void set_item(int64_t p_index, const Ref<InventoryItem> &p_item);
 	Ref<InventoryItem> get_item(int64_t p_index) const;
 
-	virtual void inventory_process(double delta);
-	GDVIRTUAL1(inventory_process, double);
+	virtual void _inventory_process(double delta);
+	GDVIRTUAL1(_inventory_process, double);
 };
 } //namespace godot

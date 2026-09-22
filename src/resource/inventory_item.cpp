@@ -25,7 +25,7 @@ void InventoryItem::_bind_methods() {
 	GDVIRTUAL_BIND(take_one);
 	GDVIRTUAL_BIND(take_all);
 
-	GDVIRTUAL_BIND(item_process, "delta");
+	GDVIRTUAL_BIND(_item_process, "delta");
 }
 
 void InventoryItem::set_item_ui_scene_path(const StringName scene_path) {
@@ -91,6 +91,6 @@ Ref<InventoryItem> InventoryItem::take_all() {
 	return result;
 }
 
-void InventoryItem::item_process(double delta) {
-	GDVIRTUAL_CALL(item_process, delta);
+void InventoryItem::_item_process(double delta) {
+	GDVIRTUAL_CALL(_item_process, delta);
 }

@@ -52,8 +52,8 @@ public:
 	GDVIRTUAL0RC(Ref<InventoryItem>, take_all);
 
 	// Called by InventoryServer for each step.
-	virtual void item_process(double delta);
-	GDVIRTUAL1(item_process, double);
+	virtual void _item_process(double delta);
+	GDVIRTUAL1(_item_process, double);
 };
 
 } //namespace godot

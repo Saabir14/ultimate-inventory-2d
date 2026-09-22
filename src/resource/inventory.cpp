@@ -21,7 +21,7 @@ void Inventory::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("set_item", "index", "item"), &Inventory::set_item);
 	ClassDB::bind_method(D_METHOD("get_item", "index"), &Inventory::get_item);
 
-	GDVIRTUAL_BIND(inventory_process, "delta");
+	GDVIRTUAL_BIND(_inventory_process, "delta");
 }
 
 void Inventory::set_slot_template(const Ref<InventorySlot> &p_slot) {
@@ -106,6 +106,6 @@ Ref<InventoryItem> Inventory::get_item(int64_t p_index) const {
 	return slot->get_item();
 }
 
-void Inventory::inventory_process(double delta) {
-    GDVIRTUAL_CALL(inventory_process, delta);
+void Inventory::_inventory_process(double delta) {
+    GDVIRTUAL_CALL(_inventory_process, delta);
 }
