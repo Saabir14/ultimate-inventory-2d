@@ -50,6 +50,10 @@ public:
 	// Implement custom item splitting behaviour
 	virtual Ref<InventoryItem> take_all();
 	GDVIRTUAL0RC(Ref<InventoryItem>, take_all);
+
+	// Called by InventoryServer for each step.
+	virtual void item_process(double delta);
+	GDVIRTUAL1(item_process, double);
 };
 
 } //namespace godot
